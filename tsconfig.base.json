@@ -1,0 +1,24 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@example/dal": ["libs/dal/src/index.ts"],
+      "@example/domain": ["libs/domain/src/index.ts"],
+      "@example/backend-shared-graphql": ["libs/backend/shared/graphql/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
