@@ -1,3 +1,5 @@
 export { BaseModel } from './base';
-export { BookModel } from './book';
-export { AuthorModel } from './author';
+export { RoomModel } from './room';
+export { UserModel } from './user';
+export { DiceModel } from './dice';
+export { TokenModel } from './token';

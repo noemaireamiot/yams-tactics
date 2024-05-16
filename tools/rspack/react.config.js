@@ -19,5 +19,13 @@ module.exports = composePlugins(withNx(), withReact(), (config) => {
     builtins: {
       react: config.builtins.react,
     },
+    devServer: {
+      proxy: [
+        {
+          context: ['/'],
+          target: 'http://localhost:3000/api',
+        },
+      ],
+    },
   };
 });

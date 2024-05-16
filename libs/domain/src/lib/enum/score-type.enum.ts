@@ -1,0 +1,15 @@
+export enum ScoreTypeEnum {
+  total_1 = 'total_1',
+  total_2 = 'total_2',
+  total_3 = 'total_3',
+  total_4 = 'total_4',
+  total_5 = 'total_5',
+  total_6 = 'total_6',
+  three_of_a_kind = 'three_of_a_kind',
+  four_of_a_kind = 'four_of_a_kind',
+  full = 'full',
+  small_straight = 'small_straight',
+  straight = 'straight',
+  five_of_a_kind = 'five_of_a_kind',
+  lucky = 'lucky',
+}
