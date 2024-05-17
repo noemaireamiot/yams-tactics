@@ -6,7 +6,7 @@ interface FaceModel extends BaseModel {
 }
 
 export interface DiceModel extends BaseModel {
-  faces: [FaceModel];
+  faces: FaceModel[];
   currentFace: FaceModel | null;
   type: DiceTypeEnum;
 }

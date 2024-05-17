@@ -1,23 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export function App() {
   const [message, setMessage] = useState('loading');
-  useEffect(() => {
-    fetch('http://localhost:3000/api')
+  const createRoom = useCallback(() => {
+    fetch('http://localhost:3000/api/room', { method: 'POST' })
       .then((res) => res.json())
       .then(({ message }) => {
         setMessage(message);
       });
   }, []);
+
   useEffect(() => {
     const source = new EventSource('/sse');
     if (source)
-      source.onmessage?.(((e: any) => {
-        console.log(e.data);
-        return e;
-      }) as any);
+      source.addEventListener('message', (message) => {
+        setMessage(message.data);
+        return message;
+      });
   }, []);
-  return <h1>{message}</h1>;
+
+  return (
+    <h1>
+      {message}
+      <button onClick={() => createRoom()}>createRoom</button>
+    </h1>
+  );
 }
 
 export default App;

@@ -26,5 +26,5 @@
     }
   },
   "implicitDependencies": ["app"],
-  "tags": []
+  "tags": ["scope:frontend", "type:app"]
 }

@@ -12,9 +12,37 @@
             "enforceBuildableLibDependency": true,
             "allow": [],
             "depConstraints": [
+              // type
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "type:shared-lib",
+                "onlyDependOnLibsWithTags": ["type:shared-lib"]
+              },
+              {
+                "sourceTag": "type:module-lib",
+                "onlyDependOnLibsWithTags": [
+                  "type:shared-lib",
+                  "type:module-lib"
+                ]
+              },
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": [
+                  "type:shared-lib",
+                  "type:module-lib"
+                ]
+              },
+              // scope
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:backend",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:backend"]
+              },
+              {
+                "sourceTag": "scope:frontend",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:frontend"]
               }
             ]
           }

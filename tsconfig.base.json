@@ -15,9 +15,15 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@example/dal": ["libs/dal/src/index.ts"],
-      "@example/domain": ["libs/domain/src/index.ts"],
-      "@example/backend-shared-graphql": ["libs/backend/shared/graphql/src/index.ts"]
+      "@yams-tactics/backend-database": ["libs/backend/database/src/index.ts"],
+      "@yams-tactics/backend-modules-room": [
+        "libs/backend/modules/room/src/index.ts"
+      ],
+      "@yams-tactics/backend-shared-graphql": [
+        "libs/backend/shared/graphql/src/index.ts"
+      ],
+      "@yams-tactics/dal": ["libs/dal/src/index.ts"],
+      "@yams-tactics/domain": ["libs/domain/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

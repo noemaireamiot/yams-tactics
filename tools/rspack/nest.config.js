@@ -49,7 +49,7 @@ module.exports = composePlugins(withNx(), (config) => {
         // This help producing a smaller bundle.
         if (
           /^@swc\/helpers/.test(request) ||
-          /^@example\//.test(request) ||
+          /^@yams-tactics\//.test(request) ||
           /nx-rspack-example\/(libs|apps)/.test(request) ||
           /^[.][.]?/.test(request)
         ) {
