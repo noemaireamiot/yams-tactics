@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Game } from './Game';
 
 export function App() {
   const [message, setMessage] = useState('loading');
@@ -21,6 +22,7 @@ export function App() {
 
   return (
     <h1>
+      <Game />
       {message}
       <button onClick={() => createRoom()}>createRoom</button>
     </h1>
