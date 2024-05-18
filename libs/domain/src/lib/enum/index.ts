@@ -1,4 +1,5 @@
-export { DiceTypeEnum } from './dice-type.enum';
-export { TokenTypeEnum } from './token-type.enum';
-export { PassiveTypeEnum } from './passive-type.enum';
-export { ScoreTypeEnum } from './score-type.enum';
+export * from './dice-type.enum';
+export * from './token-type.enum';
+export * from './passive-type.enum';
+export * from './score-type.enum';
+export * from './room-status.enum';
