@@ -1,13 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import {
   CrudService,
-  InMemoryDatabaseService,
+  InjectRepository,
+  Repository,
   Room,
 } from '@yams-tactics/backend-database';
 
 @Injectable()
 export class RoomService extends CrudService(Room) {
-  constructor(private database: InMemoryDatabaseService) {
-    super(database);
+  constructor(
+    @InjectRepository(Room)
+    private repo: Repository<Room>
+  ) {
+    super(repo);
   }
 }

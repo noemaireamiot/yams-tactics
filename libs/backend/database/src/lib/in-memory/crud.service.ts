@@ -1,24 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { entities } from '../entity';
-import { InMemoryDatabaseService } from './in-memory-database.service';
 import { Repository } from './repository';
+import { InjectRepository } from '../decorators';
 
 export function CrudService<EntityClass extends (typeof entities)[number]>(
   entity: EntityClass
 ) {
   @Injectable()
   class CrudService {
-    repository: Repository<InstanceType<EntityClass>>;
-
-    constructor(databaseService: InMemoryDatabaseService) {
-      this.repository = databaseService.getRepository(entity);
-    }
-
-    create(e?: Partial<InstanceType<EntityClass>>) {
-      return this.repository.createOne(
-        new entity(e) as InstanceType<EntityClass>
-      );
-    }
+    constructor(
+      @InjectRepository(entity)
+      public repository: Repository<InstanceType<EntityClass>>
+    ) {}
 
     getMany() {
       return this.repository.store;
@@ -26,6 +19,20 @@ export function CrudService<EntityClass extends (typeof entities)[number]>(
 
     getOne(id: string) {
       return this.repository.findOneOrFail(id);
+    }
+
+    createOne(e?: Partial<InstanceType<EntityClass>>) {
+      return this.repository.createOne(
+        new entity(e) as InstanceType<EntityClass>
+      );
+    }
+
+    updateOne(id: string, e: Partial<InstanceType<EntityClass>>) {
+      return this.repository.updateOne(id, e);
+    }
+
+    deleteOne(id: string) {
+      return this.repository.deleteOne(id);
     }
   }
 

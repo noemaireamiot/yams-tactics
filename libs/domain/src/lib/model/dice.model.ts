@@ -1,5 +1,5 @@
 import { DiceTypeEnum } from '../enum';
-import { BaseModel } from './base';
+import { BaseModel } from './base.model';
 
 interface FaceModel extends BaseModel {
   value: number;

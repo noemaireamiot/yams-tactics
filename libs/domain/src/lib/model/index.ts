@@ -1,5 +1,5 @@
-export { BaseModel } from './base';
-export { RoomModel } from './room';
-export { UserModel } from './user';
-export { DiceModel } from './dice';
-export { TokenModel } from './token';
+export { BaseModel } from './base.model';
+export { RoomModel } from './room.model';
+export { UserModel } from './user.model';
+export { DiceModel } from './dice.model';
+export { TokenModel } from './token.model';
