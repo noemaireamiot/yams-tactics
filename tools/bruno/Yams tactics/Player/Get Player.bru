@@ -1,11 +1,11 @@
 meta {
-  name: Get Rooms
+  name: Get Player
   type: http
   seq: 1
 }
 
 get {
-  url: {{base_url}}/room
+  url: {{base_url}}/player/{{player_id}}
   body: none
   auth: none
 }

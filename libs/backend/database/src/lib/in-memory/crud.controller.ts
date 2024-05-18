@@ -35,7 +35,7 @@ export function CrudController<EntityClass extends (typeof entities)[number]>(
   if (config.getOne) {
     class GetOneController extends controller {
       @Get(':id')
-      getOne(@Param() id: string) {
+      getOne(@Param('id') id: string) {
         return this.service.getOne(id);
       }
     }
@@ -66,7 +66,7 @@ export function CrudController<EntityClass extends (typeof entities)[number]>(
     class updateOneController extends controller {
       @Patch('/:id')
       updateOne(
-        @Param() id: string,
+        @Param('id') id: string,
         @Body() update: Partial<InstanceType<EntityClass>>
       ) {
         return this.service.updateOne(id, update);
@@ -78,7 +78,7 @@ export function CrudController<EntityClass extends (typeof entities)[number]>(
   if (config.deleteOne) {
     class deleteOneController extends controller {
       @Patch('/:id')
-      deleteOne(@Param() id: string) {
+      deleteOne(@Param('id') id: string) {
         return this.service.deleteOne(id);
       }
     }

@@ -1,0 +1,15 @@
+meta {
+  name: Create Player
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/player
+  body: none
+  auth: none
+}
+
+vars:post-response {
+  player_id: res.body.id
+}

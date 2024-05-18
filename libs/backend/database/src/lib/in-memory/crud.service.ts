@@ -22,8 +22,6 @@ export function CrudService<EntityClass extends (typeof entities)[number]>(
     }
 
     getOne(id: string) {
-      console.info(id);
-      console.info(this.repository.store);
       return this.repository.findOneOrFail(id);
     }
 
