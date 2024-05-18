@@ -29,7 +29,6 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
   }
 
   findOne(id: string) {
-    console.info({ findOne: this.store });
     return this.store[id] ?? null;
   }
 
@@ -38,9 +37,7 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
   }
 
   findOneOrFail(id: string) {
-    console.info(id);
     const value = this.findOne(id);
-    console.info(value);
     if (!value) {
       throw new Error(`Entity ${this.name}} with id: ${id} not found`);
     }
@@ -56,7 +53,7 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
 
   updateOne(id: string, update: Partial<E>) {
     const value = this.findOneOrFail(id);
-    const updatedValue = { ...value, update };
+    const updatedValue = { ...value, ...update };
 
     this.store[id] = updatedValue;
 

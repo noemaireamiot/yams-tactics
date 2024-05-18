@@ -1,0 +1,15 @@
+meta {
+  name: Start Game
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/game/{{game_id}}/start
+  body: none
+  auth: none
+}
+
+vars:post-response {
+  game_id: res.body.id
+}

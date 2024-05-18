@@ -1,4 +1,4 @@
-import { Injectable, MessageEvent, Param, Sse } from '@nestjs/common';
+import { Injectable, MessageEvent, Param, Post, Sse } from '@nestjs/common';
 import { CrudController } from '@yams-tactics/backend-database';
 import { Game } from '@yams-tactics/backend-database';
 import { GameService } from './game.service';
@@ -17,5 +17,10 @@ export class GameController extends CrudController(Game, {
   @Sse('/:id')
   getOne(@Param('id') id: string): Observable<MessageEvent> {
     return interval(1000).pipe(map(() => ({ data: this.service.getOne(id) })));
+  }
+
+  @Post('/:id/start')
+  startGame(@Param('id') id: string) {
+    return this.service.start(id);
   }
 }
