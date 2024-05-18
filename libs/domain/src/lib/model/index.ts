@@ -1,6 +1,11 @@
-export { BaseModel } from './base.model';
-export { RoomModel } from './room.model';
-export { UserModel } from './user.model';
-export { DiceModel } from './dice.model';
-export { TokenModel } from './token.model';
-export { PassiveModel } from './passive.model';
+export * from './base.model';
+export * from './room.model';
+export * from './user.model';
+export * from './player.model';
+export * from './scoreboard.model';
+export * from './score.model';
+export * from './game.model';
+export * from './user.model';
+export * from './dice.model';
+export * from './token.model';
+export * from './passive.model';

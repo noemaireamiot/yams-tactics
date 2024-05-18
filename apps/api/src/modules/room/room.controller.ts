@@ -7,7 +7,7 @@ export class RoomController extends CrudController(Room, {
   deleteOne: false,
   updateOne: false,
 }) {
-  constructor(private roomService: RoomService) {
+  constructor(public roomService: RoomService) {
     super(roomService);
   }
 }

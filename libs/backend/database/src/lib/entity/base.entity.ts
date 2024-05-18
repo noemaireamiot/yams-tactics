@@ -2,9 +2,9 @@ import { BaseModel } from '@yams-tactics/domain';
 import { v4 } from 'uuid';
 
 export class BaseEntity implements BaseModel {
-  id: string;
+  id = v4();
 
   constructor(props?: Partial<BaseModel>) {
-    this.id = props?.id ?? v4();
+    Object.assign(this, props);
   }
 }

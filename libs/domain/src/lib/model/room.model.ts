@@ -6,5 +6,5 @@ import { UserModel } from './user.model';
 export interface RoomModel extends BaseModel {
   users: UserModel[];
   status: RoomStatusEnum;
-  game: GameModel;
+  game: GameModel | null;
 }
