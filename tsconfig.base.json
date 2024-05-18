@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@yams-tactics/backend-database": ["libs/backend/database/src/index.ts"],
+      "@yams-tactics/backend-dto": ["libs/backend/dto/src/index.ts"],
       "@yams-tactics/backend-modules-room": [
         "libs/backend/modules/room/src/index.ts"
       ],

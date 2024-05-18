@@ -13,6 +13,10 @@ export function CrudService<EntityClass extends (typeof entities)[number]>(
       public repository: Repository<InstanceType<EntityClass>>
     ) {}
 
+    has(id: string) {
+      return this.repository.has(id);
+    }
+
     getMany() {
       return this.repository.store;
     }

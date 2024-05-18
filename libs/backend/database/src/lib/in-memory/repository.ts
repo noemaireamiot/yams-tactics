@@ -18,6 +18,10 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
     return this._name;
   }
 
+  has(id: string) {
+    return id in this.store;
+  }
+
   createOne(entity: E) {
     this.store[entity.id] = entity;
 
@@ -26,6 +30,10 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
 
   findOne(id: string) {
     return this.store[id] ?? null;
+  }
+
+  findOneBy<K extends keyof E>(key: K, value: E[K]) {
+    return Object.values(this.store).find((entity) => entity[key] === value);
   }
 
   findOneOrFail(id: string) {

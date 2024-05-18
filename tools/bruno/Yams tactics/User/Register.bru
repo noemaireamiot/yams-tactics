@@ -1,0 +1,17 @@
+meta {
+  name: Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/user/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "toto"
+  }
+}

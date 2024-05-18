@@ -1,0 +1,17 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/user/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "toto"
+  }
+}
