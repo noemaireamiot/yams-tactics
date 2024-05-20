@@ -4,11 +4,16 @@ import { createRouter } from '@swan-io/chicane';
 import { match } from 'ts-pattern';
 import { routesDefinition } from '@yams-tactics/domain';
 import { Login } from './modules/room';
+import { getLocation, Location } from '@swan-io/chicane';
 
-const Router = createRouter(routesDefinition);
+export const Router = createRouter(routesDefinition);
 
 export function App() {
   const route = Router.useRoute(['Login', 'Room', 'Game']);
+  const location: Location = getLocation();
+  if (location.path.length === 0) {
+    Router.replace('Login');
+  }
 
   // route object is a discriminated union
   return match(route)
