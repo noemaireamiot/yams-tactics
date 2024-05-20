@@ -20,12 +20,13 @@ module.exports = composePlugins(withNx(), withReact(), (config) => {
       react: config.builtins.react,
     },
     devServer: {
-      proxy: [
-        {
-          context: ['/'],
-          target: 'http://localhost:3000/api',
-        },
-      ],
+      historyApiFallback: true,
+      // proxy: [
+      //   {
+      //     context: ['/'],
+      //     target: 'http://localhost:3000/api',
+      //   },
+      // ],
     },
   };
 });
