@@ -1,0 +1,20 @@
+{
+  "name": "backend-modules-game",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/backend/modules/game/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/backend/modules/game/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:backend", "type:module-lib"]
+}

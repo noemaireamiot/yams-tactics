@@ -1,0 +1,19 @@
+meta {
+  name: Start Room
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/room/{{room_id}}/start
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+vars:post-response {
+  game_id: res.body?.game.id
+}

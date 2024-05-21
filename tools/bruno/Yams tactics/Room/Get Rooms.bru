@@ -9,3 +9,7 @@ get {
   body: none
   auth: none
 }
+
+vars:post-response {
+  room_id: Object.keys(res.body)[0]
+}

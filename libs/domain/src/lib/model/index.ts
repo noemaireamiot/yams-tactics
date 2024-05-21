@@ -6,6 +6,7 @@ export * from './scoreboard.model';
 export * from './score.model';
 export * from './game.model';
 export * from './user.model';
+export * from './face.model';
 export * from './dice.model';
 export * from './token.model';
 export * from './passive.model';

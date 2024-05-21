@@ -18,7 +18,8 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
     return this._name;
   }
 
-  has(id: string) {
+  has(id: string | null | undefined) {
+    if (id === undefined || id === null) return false;
     return id in this.store;
   }
 
@@ -28,34 +29,34 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
     return entity;
   }
 
-  findOne(id: string) {
-    return this.store[id] ?? null;
+  findOne(id: string | null | undefined) {
+    return id ? this.store[id] ?? null : null;
   }
 
   findOneBy<K extends keyof E>(key: K, value: E[K]) {
     return Object.values(this.store).find((entity) => entity[key] === value);
   }
 
-  findOneOrFail(id: string) {
+  findOneOrFail(id: string | null | undefined) {
     const value = this.findOne(id);
     if (!value) {
-      throw new Error(`Entity ${this.name}} with id: ${id} not found`);
+      throw new Error(`Entity ${this.name} with id: ${id} not found`);
     }
 
     return value;
   }
 
-  deleteOne(id: string) {
+  deleteOne(id: string | null | undefined) {
     const value = this.findOneOrFail(id);
-    delete this.store[id];
+    delete this.store[value.id];
     return value;
   }
 
-  updateOne(id: string, update: Partial<E>) {
+  updateOne(id: string | null | undefined, update: Partial<E>) {
     const value = this.findOneOrFail(id);
     const updatedValue = { ...value, ...update };
 
-    this.store[id] = updatedValue;
+    this.store[value.id] = updatedValue;
 
     return updatedValue;
   }

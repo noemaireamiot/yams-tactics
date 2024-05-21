@@ -4,7 +4,7 @@ import { CrudController, User } from '@yams-tactics/backend-database';
 import { UserService } from './user.service';
 import { RegisterInput, RegisterResponse } from './dto/register.dto';
 import { LoginInput, LoginResponse } from './dto/login.dto';
-import { RefreshInput, RefreshResponse } from './dto/refresh.dto';
+import { RefreshResponse } from './dto/refresh.dto';
 
 @Controller('user')
 export class UserController extends CrudController(User, {
@@ -20,6 +20,7 @@ export class UserController extends CrudController(User, {
 
   @Post('/register')
   register(@Body() dto: RegisterInput): RegisterResponse {
+    console.info(dto);
     return this.service.register(dto);
   }
 
@@ -29,8 +30,8 @@ export class UserController extends CrudController(User, {
   }
 
   @Post('/refresh')
-  refresh(@Body() dto: RefreshInput): RefreshResponse {
-    return this.service.refresh(dto);
+  refresh(): RefreshResponse {
+    return this.service.refresh();
   }
 
   @Get('/me')

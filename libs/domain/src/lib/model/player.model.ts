@@ -7,6 +7,7 @@ import { UserModel } from './user.model';
 
 export interface PlayerModel extends BaseModel {
   user: UserModel;
+  actions: unknown[];
 
   seed: string;
   gold: number;

@@ -11,6 +11,7 @@ import { Scoreboard } from './scoreboard.entity';
 
 export class Player extends BaseEntity implements PlayerModel {
   user: User = new User();
+  actions: unknown[] = [];
 
   gold: number = 0;
   seed: string = 'seed';
@@ -19,4 +20,9 @@ export class Player extends BaseEntity implements PlayerModel {
   dices: DiceModel[] = [];
   tokens: TokenModel[] = [];
   passives: PassiveModel[] = [];
+
+  constructor(props?: Partial<PlayerModel>) {
+    super(props);
+    Object.assign(this, props);
+  }
 }

@@ -7,4 +7,9 @@ export class Room extends BaseEntity implements RoomModel {
   users: User[] = [];
   status: RoomStatusEnum = RoomStatusEnum.pending;
   game: Game | null = null;
+
+  constructor(props?: Partial<RoomModel>) {
+    super(props);
+    Object.assign(this, props);
+  }
 }

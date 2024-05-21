@@ -1,9 +1,6 @@
 import { DiceTypeEnum } from '../enum';
 import { BaseModel } from './base.model';
-
-interface FaceModel extends BaseModel {
-  value: number;
-}
+import { FaceModel } from './face.model';
 
 export interface DiceModel extends BaseModel {
   faces: FaceModel[];

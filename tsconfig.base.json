@@ -24,7 +24,10 @@
         "libs/backend/shared/graphql/src/index.ts"
       ],
       "@yams-tactics/dal": ["libs/dal/src/index.ts"],
-      "@yams-tactics/domain": ["libs/domain/src/index.ts"]
+      "@yams-tactics/domain": ["libs/domain/src/index.ts"],
+      "@yams-tactics/backend-modules-game": [
+        "libs/backend/modules/game/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -13,7 +13,7 @@ export function CrudService<EntityClass extends (typeof entities)[number]>(
       public repository: Repository<InstanceType<EntityClass>>
     ) {}
 
-    has(id: string) {
+    has(...[id]: Parameters<InstanceType<typeof Repository>['findOne']>) {
       return this.repository.has(id);
     }
 
@@ -21,7 +21,7 @@ export function CrudService<EntityClass extends (typeof entities)[number]>(
       return this.repository.store;
     }
 
-    getOne(id: string) {
+    getOne(...[id]: Parameters<InstanceType<typeof Repository>['findOne']>) {
       return this.repository.findOneOrFail(id);
     }
 
@@ -31,11 +31,13 @@ export function CrudService<EntityClass extends (typeof entities)[number]>(
       );
     }
 
-    updateOne(id: string, e: Partial<InstanceType<EntityClass>>) {
-      return this.repository.updateOne(id, e);
+    updateOne(
+      ...[id, e]: Parameters<InstanceType<typeof Repository>['updateOne']>
+    ) {
+      return this.repository.updateOne(id, e as InstanceType<EntityClass>);
     }
 
-    deleteOne(id: string) {
+    deleteOne([id]: Parameters<InstanceType<typeof Repository>['findOne']>) {
       return this.repository.deleteOne(id);
     }
   }
