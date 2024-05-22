@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Dice } from '../../components/Dice/dice';
-import styles from './game.scss';
+import styles from './page.scss';
 
-export function Game() {
+export function GamePage() {
   const [message, setMessage] = useState('loading');
-  const [dicesValue, setDicesValue] = useState();
+  const [dicesValue, setDicesValue] = useState<number[]>();
   const [isRotating, setIsRotating] = useState(true);
 
   const launchDice = () => {
@@ -23,22 +23,22 @@ export function Game() {
     setIsRotating(true);
   };
 
-  const createRoom = useCallback(() => {
-    fetch('http://localhost:3000/api/room', { method: 'POST' })
-      .then((res) => res.json())
-      .then(({ message }) => {
-        setMessage(message);
-      });
-  }, []);
+  // const createRoom = useCallback(() => {
+  //   fetch('http://localhost:3000/api/room', { method: 'POST' })
+  //     .then((res) => res.json())
+  //     .then(({ message }) => {
+  //       setMessage(message);
+  //     });
+  // }, []);
 
-  useEffect(() => {
-    const source = new EventSource('/sse');
-    if (source)
-      source.addEventListener('message', (message) => {
-        setMessage(message.data);
-        return message;
-      });
-  }, []);
+  // useEffect(() => {
+  //   const source = new EventSource('/sse');
+  //   if (source)
+  //     source.addEventListener('message', (message) => {
+  //       setMessage(message.data);
+  //       return message;
+  //     });
+  // }, []);
 
   return (
     <h1>

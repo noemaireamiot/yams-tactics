@@ -1,1 +1,2 @@
-export * from './game';
+export * from './page';
+export * from './dice';

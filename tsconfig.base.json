@@ -17,16 +17,17 @@
     "paths": {
       "@yams-tactics/backend-database": ["libs/backend/database/src/index.ts"],
       "@yams-tactics/backend-dto": ["libs/backend/dto/src/index.ts"],
+      "@yams-tactics/backend-modules-game": [
+        "libs/backend/modules/game/src/index.ts"
+      ],
       "@yams-tactics/backend-modules-room": [
         "libs/backend/modules/room/src/index.ts"
       ],
-      "@yams-tactics/backend-shared-graphql": [
-        "libs/backend/shared/graphql/src/index.ts"
-      ],
       "@yams-tactics/dal": ["libs/dal/src/index.ts"],
       "@yams-tactics/domain": ["libs/domain/src/index.ts"],
-      "@yams-tactics/backend-modules-game": [
-        "libs/backend/modules/game/src/index.ts"
+      "@yams-tactics/frontend-common": ["libs/frontend/common/src/index.ts"],
+      "@yams-tactics/frontend-components": [
+        "libs/frontend/components/src/index.ts"
       ]
     }
   },

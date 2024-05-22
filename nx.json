@@ -39,7 +39,8 @@
         "style": "none"
       },
       "library": {
-        "style": "none"
+        "style": "none",
+        "unitTestRunner": "jest"
       }
     }
   }
