@@ -1,0 +1,2 @@
+export const ACCESS_TOKEN_EXPIRATION_SECONDS = 600; // 10min
+export const REFRESH_TOKEN_EXPIRATION_SECONDS = 3600 * 24 * 7; // 7days

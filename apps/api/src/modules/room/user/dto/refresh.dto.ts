@@ -1,6 +1,12 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
+import { UserDto } from '@yams-tactics/backend-dto';
 
-export class RefreshResponse {
+export class RefreshInput {
   @ApiProperty()
-  token: string;
+  refreshToken: string;
+}
+
+export class RefreshResponse extends PickType(UserDto, ['id', 'refreshToken']) {
+  @ApiProperty()
+  accessToken: string;
 }

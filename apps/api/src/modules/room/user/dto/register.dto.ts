@@ -6,7 +6,4 @@ export class RegisterInput {
   name: string;
 }
 
-export class RegisterResponse extends PickType(UserDto, ['id']) {
-  @ApiProperty()
-  token: string;
-}
+export class RegisterResponse extends PickType(UserDto, ['id', 'name']) {}

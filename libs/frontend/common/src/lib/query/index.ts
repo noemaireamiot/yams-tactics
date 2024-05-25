@@ -1,2 +1,2 @@
 export * from './room.query';
-export * from './user.query';
+export * from './game.query';

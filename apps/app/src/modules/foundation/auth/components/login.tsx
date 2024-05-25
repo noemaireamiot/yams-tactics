@@ -1,29 +1,22 @@
-import { Router, useRegister } from '@yams-tactics/frontend-common';
+import { Router, useAuth } from '@yams-tactics/frontend-common';
 import { FormEventHandler } from 'react';
 
-export function Register() {
-  const { mutateAsync } = useRegister();
+export function Login() {
+  const { passwordLogin } = useAuth();
   const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const { name } = Object.fromEntries(formData as any) as { name: string };
-    const { token } = await mutateAsync({ name });
-    localStorage.setItem(
-      'token',
-      token
-    );
-
-    Router.push('Game');
-
+    await passwordLogin(name);
   };
-
   return (
     <div>
       <form onSubmit={onSubmit}>
         <label htmlFor="name">Name</label>
-        <input name="name"></input>
-        <button type="submit">Register</button>
+        <input autoFocus name="name"></input>
+        <button type="submit">Login</button>
       </form>
+      <a href={Router.Register()}>Register</a>
     </div>
   );
 }

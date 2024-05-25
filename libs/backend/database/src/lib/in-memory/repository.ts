@@ -34,7 +34,9 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
   }
 
   findOneBy<K extends keyof E>(key: K, value: E[K]) {
-    return Object.values(this.store).find((entity) => entity[key] === value);
+    return (
+      Object.values(this.store).find((entity) => entity[key] === value) ?? null
+    );
   }
 
   findOneOrFail(id: string | null | undefined) {

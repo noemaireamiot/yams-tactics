@@ -23,6 +23,9 @@
       "@yams-tactics/backend-modules-room": [
         "libs/backend/modules/room/src/index.ts"
       ],
+      "@yams-tactics/backend-modules-foundation": [
+        "libs/backend/modules/foundation/src/index.ts"
+      ],
       "@yams-tactics/dal": ["libs/dal/src/index.ts"],
       "@yams-tactics/domain": ["libs/domain/src/index.ts"],
       "@yams-tactics/frontend-common": ["libs/frontend/common/src/index.ts"],

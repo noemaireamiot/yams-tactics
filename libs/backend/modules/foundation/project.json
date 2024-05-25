@@ -1,0 +1,20 @@
+{
+  "name": "backend-modules-foundation",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/backend/modules/foundation/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/backend/modules/foundation/jest.config.ts"
+      }
+    }
+  },
+  "tags": ["scope:backend", "type:module-lib"]
+}
