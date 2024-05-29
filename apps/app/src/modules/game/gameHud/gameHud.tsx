@@ -26,7 +26,7 @@ export function GameHUD({
         game={game}
         currentPlayer={currentPlayer}
       />
-      <Timer className={styles.timer} />
+      <Timer className={styles.timer} percentage={75} />
       <ScoreBoard className={styles.scoreboard} />
       <LeaderBoard className={styles.leaderboard} />
       <div className={styles.content}>{children}</div>

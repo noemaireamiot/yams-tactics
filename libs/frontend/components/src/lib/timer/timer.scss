@@ -1,0 +1,20 @@
+.progress-bar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+
+  background: radial-gradient(closest-side, white 80%, transparent 0% 0%),
+    conic-gradient(
+      rgb(221, 171, 64) var(--percentage),
+      rgba(221, 171, 64, 0.339) 0
+    );
+  &::before {
+    font-size: 2em;
+    counter-reset: secondLeft var(--secondLeft);
+    content: counter(secondLeft);
+    position: absolute;
+    top: 26px;
+    left: 29px;
+  }
+}
