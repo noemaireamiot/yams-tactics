@@ -1,6 +1,15 @@
+@import './common';
+@import './variables';
+
 html {
+  font-family: 'Alata', sans-serif;
+
+  color: $primary-color;
+
   background-image: url('./assets/greenCarpet.jpg');
-  .game {
-    height: 500px;
+  height: 100vh;
+  body {
+    height: 100%;
+    margin: 0;
   }
 }

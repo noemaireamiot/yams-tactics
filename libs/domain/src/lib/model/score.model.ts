@@ -3,6 +3,6 @@ import { BaseModel } from './base.model';
 
 export interface ScoreModel extends BaseModel {
   type: ScoreTypeEnum;
-  value: number;
+  value: number | null;
   done: boolean;
 }

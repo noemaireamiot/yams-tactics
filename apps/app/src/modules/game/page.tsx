@@ -1,6 +1,59 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Dice } from '../../components/Dice/dice';
 import styles from './page.scss';
+import { GameHUD } from './gameHud/gameHud';
+import {
+  DiceTypeEnum,
+  GameModel,
+  PlayerModel,
+  ScoreTypeEnum,
+} from '@yams-tactics/domain';
+
+const fakeGame: GameModel = {
+  id: '1',
+  players: [],
+  currentRound: 'shop.5',
+  startedAt: new Date(),
+};
+
+const fakeCurrentPlayer: PlayerModel = {
+  id: '1',
+  user: {
+    id: '1',
+    name: 'CanardWcCitron',
+  },
+  actions: [],
+
+  seed: '12987645',
+  gold: 36,
+  scoreboard: {
+    id: '3',
+    scores: [
+      {
+        id: '1',
+        type: ScoreTypeEnum.total_1,
+        value: null,
+        done: false,
+      },
+    ],
+  },
+
+  dices: [
+    {
+      id: '1',
+      faces: [
+        {
+          id: '1',
+          value: 1,
+        },
+      ],
+      type: DiceTypeEnum.white,
+      currentFace: null,
+    },
+  ],
+  tokens: [],
+  passives: [],
+};
 
 export function GamePage() {
   const [message, setMessage] = useState('loading');
@@ -41,7 +94,7 @@ export function GamePage() {
   // }, []);
 
   return (
-    <h1>
+    <GameHUD game={fakeGame} currentPlayer={fakeCurrentPlayer}>
       <div>
         <button onClick={launchDice}>Launch dice</button>
         <button onClick={resetDice}>Reset dice</button>
@@ -57,6 +110,6 @@ export function GamePage() {
       </div>
       {message}
       <button onClick={() => createRoom()}>createRoom</button>
-    </h1>
+    </GameHUD>
   );
 }
