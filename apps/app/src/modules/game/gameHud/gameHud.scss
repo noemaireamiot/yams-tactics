@@ -1,0 +1,25 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 5fr 3fr 2fr;
+  grid-template-rows: 3fr 6fr 6fr;
+  gap: 10px 10px;
+}
+
+.metadata {
+  grid-area: 1 / 1 / 2 / 3;
+}
+.timer {
+  grid-area: 1 / 3 / 2 / 4;
+}
+.scoreboard {
+  grid-area: 1 / 4 / 3 / 5;
+}
+.stuff {
+  grid-area: 3 / 4 / 4 / 5;
+}
+.leaderboard {
+  grid-area: 2 / 1 / 4 / 2;
+}
+.content {
+  grid-area: 2 / 2 / 4 / 4;
+}
