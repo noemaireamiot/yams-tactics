@@ -1,6 +1,12 @@
 @import './common';
 @import './variables';
 
+:global #root {
+  // The screen is full-height with removed padding to avoid scroll bars
+  height: calc(100vh - 20px);
+  padding: 10px;
+}
+
 html {
   font-family: 'Alata', sans-serif;
 
