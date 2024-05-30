@@ -1,13 +1,20 @@
+import { PlayerModel } from '@yams-tactics/domain';
 import styles from './leaderboard.scss';
+import { PlayerBoard } from '../playerboard';
 
 interface LeaderBoardProps {
+  leaderboard: PlayerModel[];
   className?: string;
 }
 
-export function LeaderBoard({ className }: LeaderBoardProps) {
+export function LeaderBoard({ leaderboard, className = '' }: LeaderBoardProps) {
   return (
-    <div style={{ backgroundColor: 'red' }} className={`${className || ''}`}>
-      leader board
+    <div className={`${className}`}>
+      <div className={`border-radius ${styles.metadataWrapper}`}>
+        {leaderboard.map((player) => (
+          <PlayerBoard player={player} />
+        ))}
+      </div>
     </div>
   );
 }

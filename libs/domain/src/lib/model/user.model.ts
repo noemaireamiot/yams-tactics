@@ -7,4 +7,5 @@ export interface AuthTokenModel {
 
 export interface UserModel extends BaseModel {
   name: string;
+  avatar: string;
 }

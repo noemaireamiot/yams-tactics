@@ -9,18 +9,12 @@ import {
   ScoreTypeEnum,
 } from '@yams-tactics/domain';
 
-const fakeGame: GameModel = {
-  id: '1',
-  players: [],
-  currentRound: 'shop.5',
-  startedAt: new Date(),
-};
-
 const fakeCurrentPlayer: PlayerModel = {
   id: '1',
   user: {
     id: '1',
     name: 'CanardWcCitron',
+    avatar: 'https://media.anti-crise.fr/2020/12/292776_w300h290.jpg',
   },
   actions: [],
 
@@ -125,6 +119,22 @@ const fakeCurrentPlayer: PlayerModel = {
   ],
   tokens: [],
   passives: [],
+};
+
+const fakeGame: GameModel = {
+  id: '1',
+  players: [
+    fakeCurrentPlayer,
+    fakeCurrentPlayer,
+    fakeCurrentPlayer,
+    fakeCurrentPlayer,
+    fakeCurrentPlayer,
+    fakeCurrentPlayer,
+    fakeCurrentPlayer,
+    fakeCurrentPlayer,
+  ],
+  currentRound: 'shop.5',
+  startedAt: new Date(),
 };
 
 export function GamePage() {

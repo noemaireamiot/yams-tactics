@@ -31,7 +31,7 @@ export function GameHUD({
         scoreboard={currentPlayer.scoreboard}
         className={styles.scoreboard}
       />
-      <LeaderBoard className={styles.leaderboard} />
+      <LeaderBoard className={styles.leaderboard} leaderboard={game.players} />
       <div className={styles.content}>{children}</div>
       <Stuff className={styles.stuff} />
     </div>
