@@ -10,12 +10,14 @@ interface ScoreBoardProps {
 export function ScoreBoard({ scoreboard, className = '' }: ScoreBoardProps) {
   const { t } = useTranslation();
   return (
-    <div className={`${className} ${styles.scoreboard}`}>
+    <div className={`${className} ${styles.scoreboard} shadow`}>
       <table>
         <tbody>
           {scoreboard.scores.map((score) => (
             <tr key={score.id}>
-              <td>{t(`scoreboard.${score.type}`)}</td>
+              <td className={styles.rawName}>
+                {t(`scoreboard.${score.type}`)}
+              </td>
               <td>{score.done ? score.value || 0 : ''}</td>
             </tr>
           ))}
