@@ -1,0 +1,17 @@
+{
+  "scoreboard": {
+    "total_1": "Aces",
+    "total_2": "Twos",
+    "total_3": "Threes",
+    "total_4": "Fours",
+    "total_5": "Fives",
+    "total_6": "Sixes",
+    "three_of_a_kind": "3 of a kind",
+    "four_of_a_kind": "4 of a kind",
+    "full": "Full house",
+    "small_straight": "Small straight",
+    "straight": "Large straight",
+    "five_of_a_kind": "Yahtzee",
+    "lucky": "Chance"
+  }
+}

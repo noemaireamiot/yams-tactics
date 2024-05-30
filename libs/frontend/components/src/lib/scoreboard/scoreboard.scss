@@ -1,0 +1,24 @@
+.scoreboard {
+  background-color: white;
+  color: black;
+  padding: 10px 0px;
+
+  table {
+    width: 80%;
+    height: 100%;
+    margin: auto;
+  }
+
+  table,
+  th,
+  td {
+    border: 3px solid #000;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    text-align: center;
+    width: 50%;
+  }
+}
