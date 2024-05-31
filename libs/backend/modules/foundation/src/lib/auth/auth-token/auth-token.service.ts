@@ -30,7 +30,7 @@ export class AuthTokenService {
     };
     const token = this.jwtService.sign(payload);
 
-    const newRefreshToken = this.refreshTokenService.newModel({
+    const newRefreshToken = this.refreshTokenService.createOne({
       userId: user.id,
     });
 

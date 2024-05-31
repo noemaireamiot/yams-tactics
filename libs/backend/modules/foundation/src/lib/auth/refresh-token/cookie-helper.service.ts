@@ -30,22 +30,12 @@ export class CookieHelperService {
   }
 
   private getCommonCookieOptions(): CookieOptions {
-    // const sameSite = this._getSameSite();
-
+    // @TODO - Clear for https
     return {
       httpOnly: true,
       secure: false,
-      // path: this.REFRESH_PATH,
       path: '/',
       sameSite: 'strict',
     };
-  }
-
-  /**
-   * @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite
-   * @returns
-   */
-  private _getSameSite(): 'none' {
-    return 'none';
   }
 }

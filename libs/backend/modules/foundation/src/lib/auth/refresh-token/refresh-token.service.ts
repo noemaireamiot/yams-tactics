@@ -39,10 +39,10 @@ export class RefreshTokenService {
     return text;
   }
 
-  public newModel(model: Pick<RefreshToken, 'userId'>) {
+  public createOne(refreshToken: Pick<RefreshToken, 'userId'>) {
     return this.repository.createOne(
       new RefreshToken({
-        ...model,
+        ...refreshToken,
         refreshToken: this.generate(),
         expiresAt: new Date(
           Date.now() + REFRESH_TOKEN_EXPIRATION_SECONDS * 1000

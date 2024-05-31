@@ -16,6 +16,8 @@ import { LocalAuthGuard } from './local-auth.guard';
 import { AuthPasswordService } from './auth-password.service';
 import { UserModel } from '@yams-tactics/domain';
 
+// @TODO - Effectively add password
+// Decline this controller for other usage (google sso, anonymous, ...)
 @ApiTags('auth password')
 @Controller('auth')
 export class AuthPasswordController {
