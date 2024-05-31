@@ -10,6 +10,19 @@
   display: flex;
 }
 
+:global .column {
+  flex-direction: column;
+}
+
+
+:global .column {
+  flex-direction: column;
+}
+
+:global .justify-right {
+  justify-content: right; 
+}
+
 :global .justify-center {
   justify-content: center;
 }
@@ -44,4 +57,30 @@
 
 :global .shadow {
   box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 20px, rgba(0, 0, 0, 0.5) 0px 6px 6px;
+}
+
+$SPACE_UNIT: 4;
+
+@mixin h($height) {
+  height: calc($height * $SPACE_UNIT * 1px);
+}
+
+:global .h-1 {
+  @include h(1);
+}
+
+:global .h-2 {
+  @include h(2);
+}
+
+:global .h-4 {
+  @include h(4);
+}
+
+:global .h-8 {
+  @include h(8);
+}
+
+:global .h-16 {
+  @include h(16);
 }

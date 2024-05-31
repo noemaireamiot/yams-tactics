@@ -31,6 +31,16 @@ export function createUserAuthProvider({
       []
     );
 
+    const logout = useCallback(async () => {
+      await authService.logout();
+      setAuth({
+        isAuthenticated: false,
+        userId: null,
+        logout: true,
+      });
+      return true;
+    }, []);
+
     // Login
     const passwordLogin = useCallback(async (name: string) => {
       const { userId } = await authService.passwordLogin(name);
@@ -47,7 +57,6 @@ export function createUserAuthProvider({
       []
     );
 
-    // Sync the User and refresh its token at app Startup
     const sync = useCallback(async () => {
       if (!authService.checkAuth() && !auth.logout) {
         try {
@@ -60,8 +69,7 @@ export function createUserAuthProvider({
           });
           console.info(`🔓 Logged in as user ${userId}`);
         } catch (e) {
-          // If errors, clear User and refresh without setting logout flag
-          // await authService.logout();
+          await authService.logout();
           setAuth({
             isAuthenticated: false,
             userId: null,
@@ -71,13 +79,12 @@ export function createUserAuthProvider({
       }
     }, [auth]);
 
-    // This ref deduplicate the useEffect call made twice by React in dev/StrictMode
+    // deduplicate the useEffect call made twice by React in dev/StrictMode
     const isSyncingRef = useRef(false);
     useEffect(() => {
       if (auth.isAuthenticated === null && !isSyncingRef.current) {
         isSyncingRef.current = true;
         console.info('🔄 User auth Sync');
-        // eslint-disable-next-line promise/prefer-await-to-then
         sync().finally(() => {
           isSyncingRef.current = false;
         });
@@ -87,6 +94,7 @@ export function createUserAuthProvider({
     return {
       auth,
       sync,
+      logout,
       passwordLogin,
       register,
       getToken,

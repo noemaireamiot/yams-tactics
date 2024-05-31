@@ -2,6 +2,7 @@ import { UserModel } from '@yams-tactics/domain';
 import { AuthToken } from '../token';
 import { UserAuthToken } from '../types';
 import { BaseAuthService } from './base-auth';
+import { Router } from '../../router';
 
 export class UserAuthService extends BaseAuthService {
   constructor(private readonly baseAPI: string) {
@@ -55,5 +56,23 @@ export class UserAuthService extends BaseAuthService {
     const userToken: UserModel = await response.json();
 
     return userToken; //we only get here if there is no error
+  }
+
+  public async logout(): Promise<string> {
+    const accessToken = this.authToken.getAccessToken();
+    this.authToken.clearAuthToken();
+    if (accessToken) {
+      const request = new Request(`${this.baseAPI}/auth/session/logout`, {
+        method: 'POST',
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        }),
+        credentials: 'include',
+      });
+      await fetch(request);
+    }
+
+    return Router.Login();
   }
 }

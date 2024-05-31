@@ -40,7 +40,6 @@ export class AuthPasswordController {
         req.user as UserModel
       );
 
-      // Refresh Token cookie
       this.cookieHelperService.setRefreshCookie(res, userToken);
 
       return userToken;

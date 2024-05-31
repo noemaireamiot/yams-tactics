@@ -12,7 +12,7 @@ export interface UserAuthContext {
   };
   sync: () => void;
   passwordLogin: (name: string) => Promise<string>;
-  // logout: () => Promise<boolean>;
+  logout: () => Promise<boolean>;
   register: (name: string) => Promise<string>;
   getToken: () => AuthToken<UserAuthToken>;
 }
