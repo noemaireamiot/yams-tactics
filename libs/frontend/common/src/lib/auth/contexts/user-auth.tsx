@@ -22,7 +22,6 @@ export function createUserAuthProvider({
       userId: null,
     });
 
-    // Register
     const register: UserAuthContext['register'] = useCallback(
       async (name: string) => {
         const user = await authService.register(name);
@@ -41,7 +40,6 @@ export function createUserAuthProvider({
       return true;
     }, []);
 
-    // Login
     const passwordLogin = useCallback(async (name: string) => {
       const { userId } = await authService.passwordLogin(name);
       setAuth({
@@ -51,7 +49,7 @@ export function createUserAuthProvider({
       });
       return userId;
     }, []);
-    // Token
+
     const getToken = useCallback(
       () => authService.getToken() as AuthToken<UserAuthToken>,
       []

@@ -55,7 +55,7 @@ export class UserAuthService extends BaseAuthService {
 
     const userToken: UserModel = await response.json();
 
-    return userToken; //we only get here if there is no error
+    return userToken;
   }
 
   public async logout(): Promise<string> {

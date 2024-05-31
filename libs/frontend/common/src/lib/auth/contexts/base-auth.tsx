@@ -21,7 +21,6 @@ type BaseAuthContext = UserAuthContext;
 
 export const AuthContext = createContext<BaseAuthContext | null>(null);
 
-// useAuth (provided by AuthContext)
 export const useAuth = <T extends BaseAuthContext = BaseAuthContext>(): T => {
   const context = useContext(AuthContext) as T | null;
   if (!context) {

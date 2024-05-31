@@ -5,6 +5,7 @@ import { BaseEntity } from './base.entity';
 
 export class User extends BaseEntity implements UserModel {
   name: string = 'default name';
+  declare avatar: string;
 
   constructor(props?: Partial<UserModel>) {
     super(props);
