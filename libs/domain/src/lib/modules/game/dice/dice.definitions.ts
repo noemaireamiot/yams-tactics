@@ -7,6 +7,7 @@ export const diceDefinitions: Record<
   }
 > = {
   [DiceTypeEnum.black]: { name: 'black' },
+  [DiceTypeEnum.white]: { name: 'white' },
   [DiceTypeEnum.red]: { name: 'red' },
   [DiceTypeEnum.gold]: { name: 'gold' },
 };

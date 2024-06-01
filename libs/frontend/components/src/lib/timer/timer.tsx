@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import styles from './timer.scss';
 
 interface TimerProps {
@@ -10,10 +11,12 @@ export function Timer({ percentage, className = '' }: TimerProps) {
   return (
     <div
       className={`${className} ${styles['progress-bar']} shadow`}
-      style={{
-        '--percentage': `${percentage}%`,
-        '--secondLeft': '43',
-      }}
+      style={
+        {
+          '--percentage': `${percentage}%`,
+          '--secondLeft': '43',
+        } as unknown as CSSProperties
+      }
     />
   );
 }

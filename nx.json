@@ -14,6 +14,19 @@
         "{workspaceRoot}/eslint.config.js"
       ]
     },
+    "typing": {
+      "executor": "nx:run-commands",
+      "options": {
+        "project": "{workspaceRoot}/{projectRoot}",
+        "commands": [
+          {
+            "command": "find {args.project} -name \"tsconfig.*\" ! -wholename \"{args.project}/tsconfig.json\" | xargs -I{} tsc --incremental --noEmit -p {}"
+          }
+        ]
+      },
+      "cache": true,
+      "outputs": ["{workspaceRoot}/dist/out-tsc/{projectRoot}"]
+    },
     "@nx/jest:jest": {
       "cache": true,
       "inputs": ["default", "^default", "{workspaceRoot}/jest.preset.js"],

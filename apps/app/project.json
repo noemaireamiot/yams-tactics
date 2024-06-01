@@ -27,6 +27,7 @@
         }
       }
     },
+    "typing": {},
     "serve": {
       "executor": "@nx/rspack:dev-server",
       "options": {

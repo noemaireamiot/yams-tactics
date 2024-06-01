@@ -37,7 +37,7 @@ export function CrudService<EntityClass extends (typeof entities)[number]>(
       return this.repository.updateOne(id, e as InstanceType<EntityClass>);
     }
 
-    deleteOne([id]: Parameters<InstanceType<typeof Repository>['findOne']>) {
+    deleteOne(...[id]: Parameters<InstanceType<typeof Repository>['findOne']>) {
       return this.repository.deleteOne(id);
     }
   }
