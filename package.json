@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "lint": "nx affected:lint --parallel=4",
+    "format": "nx format:write",
     "database:up": "docker-compose -f ./dev-stack/docker-compose.yml up -d database",
     "database:down": "docker-compose -f ./dev-stack/docker-compose.yml down -d database"
   },

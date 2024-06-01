@@ -10,8 +10,8 @@ export const appRoutes = {
 
   RoomArea: '/room/*',
   RoomList: '/room',
-  RoomPage: '/room/:id',
+  RoomPage: '/room/:roomId',
 
   GameArea: '/game/*',
-  Game: '/game/:id',
-};
+  Game: '/game/:gameId',
+} as const;

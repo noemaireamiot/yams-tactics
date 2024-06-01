@@ -19,7 +19,9 @@ export const RoomArea = () => {
         <div className="h-full">
           {match(route)
             .with({ name: 'RoomList' }, () => <RoomListPage />)
-            .with({ name: 'RoomPage' }, () => <RoomPage />)
+            .with({ name: 'RoomPage' }, ({ params: { roomId } }) => (
+              <RoomPage roomId={roomId} />
+            ))
             .otherwise(() => (
               <Redirect to={Router.Login()}></Redirect>
             ))}
