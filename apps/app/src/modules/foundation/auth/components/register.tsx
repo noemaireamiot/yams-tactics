@@ -6,7 +6,9 @@ export function Register() {
   const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const { name } = Object.fromEntries(formData as any) as { name: string };
+    const { name } = Object.fromEntries(
+      formData as unknown as [['name', string]]
+    );
     await register(name);
   };
 

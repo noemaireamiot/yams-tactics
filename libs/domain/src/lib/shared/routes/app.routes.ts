@@ -4,9 +4,9 @@ export const appRoutes = {
   AppRoot: '/',
 
   RegisterArea: '/register/*',
-  Register: '/register',
+  Register: '/register?:redirect',
   LoginArea: '/login/*',
-  Login: '/login',
+  Login: '/login?:redirect',
 
   RoomArea: '/room/*',
   RoomList: '/room',

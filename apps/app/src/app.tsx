@@ -5,9 +5,7 @@ import {
   UserAuthService,
   createUserAuthProvider,
 } from '@yams-tactics/frontend-common';
-import { Redirect } from '@yams-tactics/frontend-components';
 import { GamePage } from './modules/game';
-import { PropsWithChildren, ReactNode } from 'react';
 import { AuthArea } from './modules/foundation/auth/auth-area';
 import { RoomArea } from './modules/room';
 import i18n from 'i18next';

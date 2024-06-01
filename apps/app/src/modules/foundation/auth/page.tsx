@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import styles from './game.scss';
 import { Login, Register } from './components';
 
 export function UserPage() {

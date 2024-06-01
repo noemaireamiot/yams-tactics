@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Dice } from '../../components/Dice/dice';
 import styles from './page.scss';
 import { GameHUD } from './gameHud/gameHud';
@@ -138,7 +138,6 @@ const fakeGame: GameModel = {
 };
 
 export function GamePage() {
-  const [message, setMessage] = useState('loading');
   const [dicesValue, setDicesValue] = useState<number[]>();
   const [isRotating, setIsRotating] = useState(true);
 
@@ -158,23 +157,6 @@ export function GamePage() {
     setIsRotating(true);
   };
 
-  // const createRoom = useCallback(() => {
-  //   fetch('http://localhost:3000/api/room', { method: 'POST' })
-  //     .then((res) => res.json())
-  //     .then(({ message }) => {
-  //       setMessage(message);
-  //     });
-  // }, []);
-
-  // useEffect(() => {
-  //   const source = new EventSource('/sse');
-  //   if (source)
-  //     source.addEventListener('message', (message) => {
-  //       setMessage(message.data);
-  //       return message;
-  //     });
-  // }, []);
-
   return (
     <GameHUD game={fakeGame} currentPlayer={fakeCurrentPlayer}>
       <div>
@@ -190,8 +172,6 @@ export function GamePage() {
           </div>
         </div>
       </div>
-      {message}
-      <button onClick={() => createRoom()}>createRoom</button>
     </GameHUD>
   );
 }

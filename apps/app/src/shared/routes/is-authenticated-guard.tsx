@@ -21,7 +21,7 @@ export const IsAuthenticatedConsoleGuard = ({
       if (!auth.logout) {
         options = { redirect: toString() };
       }
-      Router.push(redirectRoute);
+      Router.push(redirectRoute, options);
     }
   }, [auth, redirectRoute, toString]);
 
