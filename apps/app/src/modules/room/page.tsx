@@ -6,7 +6,11 @@ import {
   useJoinRoom,
   useRoom,
 } from '@yams-tactics/frontend-common';
+import { UserCard } from '@yams-tactics/frontend-components';
 import { v4 } from 'uuid';
+
+const botAvatar =
+  'https://s22908.pcdn.co/wp-content/uploads/2022/02/what-are-bots.jpg';
 
 export function RoomPage({ roomId }: { roomId: string }) {
   const { auth } = useAuth();
@@ -29,7 +33,7 @@ export function RoomPage({ roomId }: { roomId: string }) {
             return {
               id,
               name: `Bot ${index}`,
-              avatar: null,
+              avatar: botAvatar,
             };
           }),
       ];
@@ -41,12 +45,12 @@ export function RoomPage({ roomId }: { roomId: string }) {
       <h1>Room:</h1>
       <div>id: {roomId}</div>
       <div>
-        Players:
-        <ul>
+        <h3>Players:</h3>
+        <div>
           {players.map((player) => (
-            <li key={player.id}>{player.name}</li>
+            <UserCard user={player} />
           ))}
-        </ul>
+        </div>
       </div>
       <button
         disabled={joined}
