@@ -26,7 +26,7 @@ export const IsAuthenticatedConsoleGuard = ({
   }, [auth, redirectRoute, toString]);
 
   // Not authenticated -> redirect
-  if (auth.isAuthenticated === false) {
+  if (!auth.isAuthenticated) {
     return <h1>Loading</h1>;
   }
 

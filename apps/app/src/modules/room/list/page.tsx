@@ -1,18 +1,9 @@
 import { Link } from '@swan-io/chicane';
 import { Router, useCreateRoom, useRooms } from '@yams-tactics/frontend-common';
-import { useEffect } from 'react';
 
 export function RoomListPage() {
   const { data: rooms, isLoading, refetch } = useRooms();
   const { mutateAsync: createRoom } = useCreateRoom();
-
-  useEffect(() => {
-    // @TODO - Replace with sse ?
-    const interval = setInterval(refetch, 5000);
-    return () => {
-      clearInterval(interval);
-    };
-  });
 
   return (
     <div>
@@ -20,7 +11,6 @@ export function RoomListPage() {
       <button
         onClick={async () => {
           const room = await createRoom();
-          // @TODO - Join the room
           refetch();
           Router.push('RoomPage', { roomId: room.id });
         }}

@@ -1,7 +1,6 @@
 import { createContext, useContext } from 'react';
 import { AuthToken } from '../token';
 import { UserAuthToken } from '../types';
-import { AuthTokenModel } from '@yams-tactics/domain';
 
 export interface UserAuthContext {
   auth: {

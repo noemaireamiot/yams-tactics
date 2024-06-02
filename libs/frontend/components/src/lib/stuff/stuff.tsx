@@ -5,6 +5,7 @@ interface StuffProps {
 }
 
 export function Stuff({ className }: StuffProps) {
+  void styles;
   return (
     <div style={{ backgroundColor: 'green' }} className={`${className || ''}`}>
       stuff

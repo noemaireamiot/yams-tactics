@@ -5,12 +5,12 @@ import { axios } from '../axios';
 const ENDPOINT = '/game';
 
 export const useGame = (id: string) => {
-  return useQuery<{id: string}, unknown, GameModel>({
-    queryKey: ['game', {id}],
-    queryFn: async ({} ) => {
+  return useQuery<{ id: string }, unknown, GameModel>({
+    queryKey: ['game', { id }],
+    queryFn: async () => {
       const { data } = await axios.get(`${ENDPOINT}/${id}`);
 
-      return data
+      return data;
     },
   });
 };

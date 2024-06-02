@@ -35,13 +35,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  /**
-   * Return user after JWT signature has been validated
-   * @param payload
-   * @returns
-   */
   public async validate(payload: { sub?: string }): Promise<User | null> {
-    // Check User
     if (payload.sub) {
       const user = await this.userRepo.findOne(payload.sub);
       if (!user) {

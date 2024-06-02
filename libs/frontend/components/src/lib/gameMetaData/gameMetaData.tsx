@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { Tag } from '../tag';
 import styles from './gameMetaData.scss';
-import { Tag } from '@yams-tactics/frontend-components';
 import { GameModel, PlayerModel } from '@yams-tactics/domain';
 
 interface GameMetaDataProps {

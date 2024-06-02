@@ -1,1 +1,1 @@
-export { AuthenticatedUserGuard } from './authenticated-user.guard';
+export const __placeholder_auth_guards = false;

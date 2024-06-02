@@ -22,12 +22,22 @@ export function createUserAuthProvider({
       userId: null,
     });
 
+    const passwordLogin = useCallback(async (name: string) => {
+      const { userId } = await authService.passwordLogin(name);
+      setAuth({
+        isAuthenticated: true,
+        userId,
+        logout: false,
+      });
+      return userId;
+    }, []);
+
     const register: UserAuthContext['register'] = useCallback(
       async (name: string) => {
         const user = await authService.register(name);
         return await passwordLogin(user.name);
       },
-      []
+      [passwordLogin]
     );
 
     const logout = useCallback(async () => {
@@ -38,16 +48,6 @@ export function createUserAuthProvider({
         logout: true,
       });
       return true;
-    }, []);
-
-    const passwordLogin = useCallback(async (name: string) => {
-      const { userId } = await authService.passwordLogin(name);
-      setAuth({
-        isAuthenticated: true,
-        userId,
-        logout: false,
-      });
-      return userId;
     }, []);
 
     const getToken = useCallback(

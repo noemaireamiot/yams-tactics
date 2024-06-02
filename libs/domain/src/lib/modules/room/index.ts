@@ -1,1 +1,1 @@
-export const room = 1;
+export * from './constants';

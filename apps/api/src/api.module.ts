@@ -11,12 +11,14 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { GameModule } from './modules/game/game.module';
 import { UserModule } from './modules/room/user/user.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from '@yams-tactics/backend-modules-foundation';
 
 @Module({
   imports: [
     DatabaseModule,
     ConfigModule.forRoot({ isGlobal: true }),
     AppModule,
+    AuthModule,
     RoomModule,
     GameModule,
     UserModule,
