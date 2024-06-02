@@ -30,6 +30,7 @@ export class GameController extends CrudController(Game, {
         const game = this.service.getOne(id);
         const elapsedTime = (+new Date() - +game.startedAt) / 1000;
 
+        // Close SSE after game
         if (elapsedTime > maxTime) res.socket.end();
 
         return { data: game };

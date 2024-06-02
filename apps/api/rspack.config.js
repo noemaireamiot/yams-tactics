@@ -1,5 +1,3 @@
-const { composePlugins, withNx } = require('@nx/rspack');
+const nestConfig = require('../../tools/rspack/nest.config');
 
-module.exports = composePlugins(withNx(), (config) => {
-  return config;
-});
+module.exports = nestConfig;

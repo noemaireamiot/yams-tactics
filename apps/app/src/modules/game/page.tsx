@@ -11,7 +11,6 @@ export function GamePage({ gameId }: { gameId: string }) {
   const currentPlayer =
     (data?.players ?? []).find((player) => player.user.id === userId) ?? null;
 
-  console.info(data);
   if (isLoading) {
     return <h1>Starting game...</h1>;
   }

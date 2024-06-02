@@ -43,20 +43,20 @@ module.exports = composePlugins(withNx(), (config) => {
       preset: 'normal',
     },
     devtools: 'cheap-source-map',
-    externals: [
-      function ({ request }, callback) {
-        // Everything should be externals except our code and swc helpers
-        // This help producing a smaller bundle.
-        if (
-          /^@swc\/helpers/.test(request) ||
-          /^@yams-tactics\//.test(request) ||
-          /nx-rspack-example\/(libs|apps)/.test(request) ||
-          /^[.][.]?/.test(request)
-        ) {
-          callback();
-        }
-        return callback(null, request);
-      },
-    ],
+    // externals: [
+    //   function ({ request }, callback) {
+    //     // Everything should be externals except our code and swc helpers
+    //     // This help producing a smaller bundle.
+    //     if (
+    //       /^@swc\/helpers/.test(request) ||
+    //       /^@yams-tactics\//.test(request) ||
+    //       /nx-rspack-example\/(libs|apps)/.test(request) ||
+    //       /^[.][.]?/.test(request)
+    //     ) {
+    //       callback();
+    //     }
+    //     return callback(null, request);
+    //   },
+    // ],
   };
 });
