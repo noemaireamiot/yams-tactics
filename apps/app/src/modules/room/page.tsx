@@ -1,5 +1,9 @@
 import { Link } from '@swan-io/chicane';
-import { PLAYER_PER_ROOM, UserModel } from '@yams-tactics/domain';
+import {
+  PLAYER_PER_ROOM,
+  RoomStatusEnum,
+  UserModel,
+} from '@yams-tactics/domain';
 import {
   Router,
   useAuth,
@@ -7,7 +11,7 @@ import {
   useRoom,
   useStartGame,
 } from '@yams-tactics/frontend-common';
-import { UserCard } from '@yams-tactics/frontend-components';
+import { Redirect, UserCard } from '@yams-tactics/frontend-components';
 import { v4 } from 'uuid';
 
 const botAvatar =
@@ -15,14 +19,14 @@ const botAvatar =
 
 export function RoomPage({ roomId }: { roomId: string }) {
   const { auth } = useAuth();
-  const { data, isLoading, refetch } = useRoom(roomId);
+  const { data: room, isLoading, refetch } = useRoom(roomId);
   const { mutateAsync: joinRoom } = useJoinRoom();
   const { mutateAsync: startGame } = useStartGame();
 
   const joined =
-    isLoading || !!data?.users.find((user) => user.id === auth.userId);
+    isLoading || !!room?.users.find((user) => user.id === auth.userId);
 
-  const users = data?.users ?? [];
+  const users = room?.users ?? [];
   const players = isLoading
     ? []
     : [
@@ -39,6 +43,9 @@ export function RoomPage({ roomId }: { roomId: string }) {
             };
           }),
       ];
+
+  if (room?.status === RoomStatusEnum.playing && room?.game)
+    return <Redirect to={Router.Game({ gameId: room.game.id })} />;
 
   return (
     <div>

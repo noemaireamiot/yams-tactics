@@ -18,7 +18,7 @@ export function gameLoop(
           const faces = computeDicesRoll(player);
           return {
             ...player,
-            actions: [...player.actions, { type: ActionTypeEnum.roll }],
+            actions: [...player.actions, { type: ActionTypeEnum.roll_dices }],
             dices: player.dices.map((dice, i) => {
               return { ...dice, currentFace: faces[i] };
             }),

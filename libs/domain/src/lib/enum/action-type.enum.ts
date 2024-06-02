@@ -1,3 +1,3 @@
 export enum ActionTypeEnum {
-  roll = 'roll',
+  roll_dices = 'roll_dices',
 }

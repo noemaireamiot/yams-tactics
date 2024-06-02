@@ -39,6 +39,10 @@ export class Repository<E extends Entity> implements RepositoryModel<E> {
     );
   }
 
+  findOneWhere(where: (e: E) => boolean) {
+    return Object.values(this.store).find(where) ?? null;
+  }
+
   findOneOrFail(id: string | null | undefined) {
     const value = this.findOne(id);
     if (!value) {

@@ -43,6 +43,8 @@ export const useRoom = (id: string) => {
   const authHeader = useAuthHeader();
   return useQuery<{ id: string }, unknown, RoomModel>({
     queryKey: ['room', { id }],
+    // @TODO - Replace with SSE ?
+    refetchInterval: 1000,
     queryFn: async () => {
       const { data } = await axios.get(`${ENDPOINT}/${id}`, { ...authHeader });
 

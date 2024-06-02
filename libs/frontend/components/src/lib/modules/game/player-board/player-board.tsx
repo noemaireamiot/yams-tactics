@@ -9,5 +9,5 @@ interface PlayerBoardProps {
 
 export function PlayerBoard({ player }: PlayerBoardProps) {
   void styles;
-  return <UserCard user={player.user} score={43} />;
+  return <UserCard user={player.user} score={0} />;
 }

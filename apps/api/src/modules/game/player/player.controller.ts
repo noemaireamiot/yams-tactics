@@ -1,10 +1,16 @@
-import { Body, Injectable, Param, Post } from '@nestjs/common';
+import { Body, Injectable, Post, UseGuards } from '@nestjs/common';
 import { CrudController } from '@yams-tactics/backend-database';
 import { Player } from '@yams-tactics/backend-database';
 import { PlayerService } from './player.service';
 import { ActionInput } from './dto';
+import {
+  CurrentUser,
+  JwtAuthGuard,
+} from '@yams-tactics/backend-modules-foundation';
+import { UserModel } from '@yams-tactics/domain';
 
 @Injectable()
+@UseGuards(JwtAuthGuard)
 export class PlayerController extends CrudController(Player, {
   deleteOne: false,
   updateOne: false,
@@ -13,9 +19,8 @@ export class PlayerController extends CrudController(Player, {
     super(service);
   }
 
-  @Post('/:id/actions')
-  actions(@Param('id') id: string, @Body() { type }: ActionInput) {
-    void id, type;
-    return {};
+  @Post('/actions')
+  actions(@Body() { type }: ActionInput, @CurrentUser() user: UserModel) {
+    this.service.actions(type, user);
   }
 }
