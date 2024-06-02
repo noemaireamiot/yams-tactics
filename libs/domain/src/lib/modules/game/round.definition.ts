@@ -1,11 +1,11 @@
 import { Round } from '../../model';
 
 export const ROUND_COUNT = 13;
-export const ROUND_BASE_TIME = 5;
+export const ROUND_BASE_TIME = 7;
 export const roundDefinition: Partial<Record<Round, { time: number }>> = {};
 
-export function getRoundDefinition(round: Round) {
-  const explicit = roundDefinition[round];
+export function getRoundDefinition(round?: Round) {
+  const explicit = round && roundDefinition[round];
   if (explicit) return explicit;
 
   return { time: ROUND_BASE_TIME };
@@ -26,7 +26,7 @@ export const maxTime = roundsFactory().reduce(
 export function getRoundFromTime(elapsedTime: number) {
   const rounds = roundsFactory();
 
-  const { round } = rounds.reduce<{
+  return rounds.reduce<{
     done: boolean;
     left: number;
     round: Round;
@@ -44,5 +44,4 @@ export function getRoundFromTime(elapsedTime: number) {
     },
     { done: false, left: elapsedTime, round: rounds[0] }
   );
-  return round;
 }

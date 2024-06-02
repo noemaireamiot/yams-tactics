@@ -1,5 +1,6 @@
 import { GameModel } from '@yams-tactics/domain';
 import { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
 
 const ENDPOINT = '/game';
 

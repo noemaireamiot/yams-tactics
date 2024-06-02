@@ -7,18 +7,18 @@ import {
   Timer,
 } from '@yams-tactics/frontend-components';
 import { PropsWithChildren } from 'react';
-import styles from './gameHud.scss';
+import styles from './game-layout.scss';
 
-interface GameHUDProps {
+interface GameLayoutProps {
   game: GameModel | null;
   currentPlayer: PlayerModel | null;
 }
 
-export function GameHUD({
+export function GameLayout({
   children,
   game,
   currentPlayer,
-}: PropsWithChildren<GameHUDProps>) {
+}: PropsWithChildren<GameLayoutProps>) {
   return (
     <div className={`${styles.container} h-full`}>
       <GameMetaData
@@ -26,7 +26,7 @@ export function GameHUD({
         game={game}
         currentPlayer={currentPlayer}
       />
-      <Timer className={styles.timer} percentage={75} />
+      {game ? <Timer className={styles.timer} game={game} /> : <div />}
       <ScoreBoard
         scoreboard={currentPlayer?.scoreboard ?? null}
         className={styles.scoreboard}

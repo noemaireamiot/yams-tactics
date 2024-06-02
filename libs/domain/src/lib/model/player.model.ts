@@ -1,3 +1,4 @@
+import { ActionTypeEnum } from '../enum';
 import { BaseModel } from './base.model';
 import { DiceModel } from './dice.model';
 import { PassiveModel } from './passive.model';
@@ -7,7 +8,7 @@ import { UserModel } from './user.model';
 
 export interface PlayerModel extends BaseModel {
   user: UserModel;
-  actions: unknown[];
+  actions: { type: ActionTypeEnum }[];
 
   seed: string;
   gold: number;

@@ -6,12 +6,9 @@ import {
   Player,
   Repository,
   Room,
+  Scoreboard,
 } from '@yams-tactics/backend-database';
-import {
-  computeDicesRoll,
-  getRoundFromTime,
-  maxTime,
-} from '@yams-tactics/domain';
+import { gameLoop } from '@yams-tactics/domain';
 import { v4 } from 'uuid';
 
 @Injectable()
@@ -21,32 +18,6 @@ export class GameService {
     @InjectRepository(Player) public playerRepo: Repository<Player>,
     @InjectRepository(Dice) public diceRepo: Repository<Dice>
   ) {}
-
-  gameLoop(id: string) {
-    const game = this.gameRepo.findOneOrFail(id);
-    const interval = setInterval(() => {
-      const time = (+new Date() - +game.startedAt) / 1000;
-      console.info('loop game: ', id);
-
-      const currentRound = getRoundFromTime(time);
-
-      game.players.forEach((_, i) => {
-        const faces = computeDicesRoll(game.players[i]);
-        game.players[i].dices.forEach((_, j) => {
-          game.players[i].dices[j].currentFace = faces[j];
-        });
-      });
-
-      this.gameRepo.updateOne(game.id, {
-        ...game,
-        currentRound,
-      });
-
-      if (time > maxTime) {
-        clearInterval(interval);
-      }
-    }, 5000);
-  }
 
   start(room: Room) {
     // initialize game
@@ -58,18 +29,28 @@ export class GameService {
             .fill(0)
             .map(() => this.diceRepo.createOne(new Dice()));
 
+          const scoreboard = new Scoreboard();
+          const gold = 5;
+          const defaultAvatar =
+            'https://media.anti-crise.fr/2020/12/292776_w300h290.jpg';
+          user.avatar = user.avatar || defaultAvatar;
+
           return this.playerRepo.createOne(
             new Player({
               seed: v4(),
+              gold,
               user,
               dices,
+              scoreboard,
             })
           );
         }),
       })
     );
 
-    this.gameLoop(game.id);
+    gameLoop(game, {
+      gameUpdateFn: (game) => this.gameRepo.updateOne(game.id, game),
+    });
 
     return game;
   }

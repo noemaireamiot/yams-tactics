@@ -1,14 +1,9 @@
 import { DiceModel, FaceModel, PlayerModel } from '../../../model';
 import { getRandomNBetween } from '../../../random';
 
-export const computeDiceRoll = (
-  player: PlayerModel,
-  dice: DiceModel,
-  n: number
-) => {
+export const computeDiceRoll = (player: PlayerModel, dice: DiceModel) => {
   const randomFace = getRandomNBetween(
-    player.seed,
-    n,
+    [player.seed, dice.id, player.actions.length].join(''),
     0,
     dice.faces.length - 1
   );
@@ -17,8 +12,7 @@ export const computeDiceRoll = (
 
 export const computeDicesRoll = (player: PlayerModel): FaceModel[] => {
   const faces = player.dices.map((dice) => {
-    player.actions.push('roll dice');
-    return computeDiceRoll(player, dice, player.actions.length);
+    return computeDiceRoll(player, dice);
   });
 
   return faces;

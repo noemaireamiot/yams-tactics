@@ -11,6 +11,6 @@ describe('getRoundFromTime', () => {
     { time: ROUND_BASE_TIME * 14, round: `dice.7` },
     { time: 15000, round: `dice.13` },
   ])('should get correct round $round for $time', ({ time, round }) => {
-    expect(getRoundFromTime(time)).toBe(round);
+    expect(getRoundFromTime(time).round).toBe(round);
   });
 });

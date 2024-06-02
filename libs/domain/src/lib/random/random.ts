@@ -37,24 +37,14 @@ const random = (seed: string) => {
   return splitmix32(hashedSeed[0]);
 };
 
-export const getRandomN = (seed: string, n: number) => {
+export const getRandom = (seed: string) => {
   const rand = random(seed);
 
-  let value = 0;
-  for (let i = 0; i <= n; i++) {
-    value = rand();
-  }
-
-  return value;
+  return rand();
 };
 
-export const getRandomNBetween = (
-  seed: string,
-  n: number,
-  min: number,
-  max: number
-) => {
-  const value = getRandomN(seed, n);
+export const getRandomNBetween = (seed: string, min: number, max: number) => {
+  const value = getRandom(seed);
 
   return Math.round(value * (max - min) + min);
 };
