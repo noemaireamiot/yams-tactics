@@ -70,7 +70,7 @@ export const useJoinRoom = () => {
 
 export const useStartGame = () => {
   const authHeader = useAuthHeader();
-  return useMutation<GameModel, unknown, { id: string }>({
+  return useMutation<RoomModel, unknown, { id: string }>({
     mutationKey: ['startGame'],
     mutationFn: async ({ id }) => {
       const { data } = await axios.post(

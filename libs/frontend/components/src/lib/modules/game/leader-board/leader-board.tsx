@@ -1,6 +1,6 @@
 import { PlayerModel } from '@yams-tactics/domain';
-import styles from './leaderboard.scss';
-import { PlayerBoard } from '../playerboard';
+import styles from './leader-board.scss';
+import { PlayerBoard } from '../player-board';
 
 interface LeaderBoardProps {
   leaderboard: PlayerModel[];
@@ -12,7 +12,7 @@ export function LeaderBoard({ leaderboard, className = '' }: LeaderBoardProps) {
     <div className={`${className}`}>
       <div className={`border-radius ${styles.metadataWrapper}`}>
         {leaderboard.map((player) => (
-          <PlayerBoard player={player} />
+          <PlayerBoard key={player.id} player={player} />
         ))}
       </div>
     </div>

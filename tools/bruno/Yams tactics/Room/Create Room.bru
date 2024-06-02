@@ -7,7 +7,11 @@ meta {
 post {
   url: {{base_url}}/room
   body: none
-  auth: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
 }
 
 vars:post-response {

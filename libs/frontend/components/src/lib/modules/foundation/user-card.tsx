@@ -22,7 +22,7 @@ export function UserCard({
       )}
       <div
         style={{
-          gridColumn: 'span 2',
+          gridColumn: typeof score === 'number' ? 'span 2' : undefined,
         }}
         className="ellipsis"
       >

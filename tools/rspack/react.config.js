@@ -24,7 +24,7 @@ module.exports = composePlugins(withNx(), withReact(), (config) => {
       proxy: [
         {
           context: ['/api'],
-          target: 'http://localhost:3000/api',
+          target: 'http://localhost:3000',
         },
       ],
     },

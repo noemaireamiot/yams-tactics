@@ -5,6 +5,7 @@ import {
   useAuth,
   useJoinRoom,
   useRoom,
+  useStartGame,
 } from '@yams-tactics/frontend-common';
 import { UserCard } from '@yams-tactics/frontend-components';
 import { v4 } from 'uuid';
@@ -16,6 +17,7 @@ export function RoomPage({ roomId }: { roomId: string }) {
   const { auth } = useAuth();
   const { data, isLoading, refetch } = useRoom(roomId);
   const { mutateAsync: joinRoom } = useJoinRoom();
+  const { mutateAsync: startGame } = useStartGame();
 
   const joined =
     isLoading || !!data?.users.find((user) => user.id === auth.userId);
@@ -48,19 +50,29 @@ export function RoomPage({ roomId }: { roomId: string }) {
         <h3>Players:</h3>
         <div>
           {players.map((player) => (
-            <UserCard user={player} />
+            <UserCard key={player.id} user={player} />
           ))}
         </div>
       </div>
-      <button
-        disabled={joined}
-        onClick={async () => {
-          await joinRoom({ id: roomId });
-          refetch();
-        }}
-      >
-        join
-      </button>
+      <div className="flex">
+        <button
+          disabled={joined}
+          onClick={async () => {
+            await joinRoom({ id: roomId });
+            refetch();
+          }}
+        >
+          join
+        </button>
+        <button
+          onClick={async () => {
+            const { game } = await startGame({ id: roomId });
+            if (game) Router.push('Game', { gameId: game.id });
+          }}
+        >
+          start
+        </button>
+      </div>
     </div>
   );
 }

@@ -5,12 +5,12 @@ import {
   UserAuthService,
   createUserAuthProvider,
 } from '@yams-tactics/frontend-common';
-import { GamePage } from './modules/game';
 import { AuthArea } from './modules/foundation/auth/auth-area';
 import { RoomArea } from './modules/room';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import translationEN from './locales/en/translation.json';
+import { GameArea } from './modules/game/game-area';
 
 const environment = { baseAPI: 'http://localhost:3000/api' };
 
@@ -44,7 +44,7 @@ export function App() {
       <QueryProvider>
         {match(route)
           .with({ name: 'RoomArea' }, () => <RoomArea />)
-          .with({ name: 'GameArea' }, () => <GamePage />)
+          .with({ name: 'GameArea' }, () => <GameArea />)
           .otherwise(() => (
             <AuthArea />
           ))}

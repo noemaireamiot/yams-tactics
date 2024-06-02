@@ -2,12 +2,8 @@ import { useState } from 'react';
 import { Dice } from '../../components/Dice/dice';
 import styles from './page.scss';
 import { GameHUD } from './gameHud/gameHud';
-import {
-  DiceTypeEnum,
-  GameModel,
-  PlayerModel,
-  ScoreTypeEnum,
-} from '@yams-tactics/domain';
+import { DiceTypeEnum, PlayerModel, ScoreTypeEnum } from '@yams-tactics/domain';
+import { useAuth, useGame } from '@yams-tactics/frontend-common';
 
 const fakeCurrentPlayer: PlayerModel = {
   id: '1',
@@ -121,24 +117,19 @@ const fakeCurrentPlayer: PlayerModel = {
   passives: [],
 };
 
-const fakeGame: GameModel = {
-  id: '1',
-  players: [
-    fakeCurrentPlayer,
-    fakeCurrentPlayer,
-    fakeCurrentPlayer,
-    fakeCurrentPlayer,
-    fakeCurrentPlayer,
-    fakeCurrentPlayer,
-    fakeCurrentPlayer,
-    fakeCurrentPlayer,
-  ],
-  currentRound: 'shop.5',
-  startedAt: new Date(),
-};
-
-export function GamePage() {
-  const [dicesValue, setDicesValue] = useState<number[]>();
+export function GamePage({ gameId }: { gameId: string }) {
+  const { data } = useGame(gameId);
+  const {
+    auth: { userId },
+  } = useAuth();
+  console.info(data?.players);
+  const [dicesValue, setDicesValue] = useState<number[]>([
+    Math.floor(Math.random() * 5) + 1,
+    Math.floor(Math.random() * 5) + 1,
+    Math.floor(Math.random() * 5) + 1,
+    Math.floor(Math.random() * 5) + 1,
+    Math.floor(Math.random() * 5) + 1,
+  ]);
   const [isRotating, setIsRotating] = useState(true);
 
   const launchDice = () => {
@@ -153,23 +144,34 @@ export function GamePage() {
   };
 
   const resetDice = () => {
-    setDicesValue(undefined);
+    setDicesValue([]);
     setIsRotating(true);
   };
 
+  const currentPlayer =
+    (data?.players ?? []).find((player) => player.user.id === userId) ?? null;
+
   return (
-    <GameHUD game={fakeGame} currentPlayer={fakeCurrentPlayer}>
-      <div>
-        <button onClick={launchDice}>Launch dice</button>
-        <button onClick={resetDice}>Reset dice</button>
-        <div className={styles.game}>
-          <div className={styles.dices}>
-            <Dice value={dicesValue?.[0]} rotating={isRotating} />
-            <Dice value={dicesValue?.[1]} rotating={isRotating} />
-            <Dice value={dicesValue?.[2]} rotating={isRotating} />
-            <Dice value={dicesValue?.[3]} rotating={isRotating} />
-            <Dice value={dicesValue?.[4]} rotating={isRotating} />
-          </div>
+    <GameHUD
+      game={data}
+      currentPlayer={
+        currentPlayer
+          ? {
+              ...currentPlayer,
+              scoreboard: fakeCurrentPlayer.scoreboard,
+            }
+          : null
+      }
+    >
+      <button onClick={launchDice}>Launch dice</button>
+      <button onClick={resetDice}>Reset dice</button>
+      <div className={styles.game}>
+        <div className={styles.dices}>
+          <Dice value={dicesValue?.[0]} rotating={isRotating} />
+          <Dice value={dicesValue?.[1]} rotating={isRotating} />
+          <Dice value={dicesValue?.[2]} rotating={isRotating} />
+          <Dice value={dicesValue?.[3]} rotating={isRotating} />
+          <Dice value={dicesValue?.[4]} rotating={isRotating} />
         </div>
       </div>
     </GameHUD>

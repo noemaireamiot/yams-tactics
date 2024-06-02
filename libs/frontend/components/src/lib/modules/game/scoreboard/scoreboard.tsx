@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './scoreboard.scss';
 
 interface ScoreBoardProps {
-  scoreboard: ScoreboardModel;
+  scoreboard: ScoreboardModel | null;
   className?: string;
 }
 
@@ -13,7 +13,7 @@ export function ScoreBoard({ scoreboard, className = '' }: ScoreBoardProps) {
     <div className={`${className} ${styles.scoreboard} shadow`}>
       <table>
         <tbody>
-          {scoreboard.scores.map((score) => (
+          {(scoreboard?.scores ?? []).map((score) => (
             <tr key={score.id}>
               <td className={styles.rawName}>
                 {t(`scoreboard.${score.type}`)}

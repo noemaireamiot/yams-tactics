@@ -4,8 +4,8 @@ import { GameModel, PlayerModel } from '@yams-tactics/domain';
 
 interface GameMetaDataProps {
   className?: string;
-  game: GameModel;
-  currentPlayer: PlayerModel;
+  game: GameModel | null;
+  currentPlayer: PlayerModel | null;
 }
 
 export function GameMetaData({
@@ -19,15 +19,15 @@ export function GameMetaData({
         <div className={`${styles.name} w-full`}>
           <Tag
             className={`flex justify-center w-full box-border`}
-            label={currentPlayer.user.name}
+            label={currentPlayer?.user.name || 'Loading'}
             size="L"
           />
         </div>
         <div className={`${styles.round}`}>
-          <Tag label={`${game.currentRound}/13`} size="L" />
+          {game && <Tag label={`${game.currentRound}/13`} size="L" />}
         </div>
         <div className={`${styles.gold}`}>
-          <Tag label={`${currentPlayer.gold}$`} size="L" />
+          <Tag label={`${currentPlayer?.gold}$`} size="L" />
         </div>
       </div>
     </div>

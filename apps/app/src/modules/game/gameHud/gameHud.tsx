@@ -10,8 +10,8 @@ import { PropsWithChildren } from 'react';
 import styles from './gameHud.scss';
 
 interface GameHUDProps {
-  game: GameModel;
-  currentPlayer: PlayerModel;
+  game: GameModel | null;
+  currentPlayer: PlayerModel | null;
 }
 
 export function GameHUD({
@@ -28,10 +28,13 @@ export function GameHUD({
       />
       <Timer className={styles.timer} percentage={75} />
       <ScoreBoard
-        scoreboard={currentPlayer.scoreboard}
+        scoreboard={currentPlayer?.scoreboard ?? null}
         className={styles.scoreboard}
       />
-      <LeaderBoard className={styles.leaderboard} leaderboard={game.players} />
+      <LeaderBoard
+        className={styles.leaderboard}
+        leaderboard={game?.players ?? []}
+      />
       <div className={styles.content}>{children}</div>
       <Stuff className={styles.stuff} />
     </div>
