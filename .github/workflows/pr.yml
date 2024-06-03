@@ -23,7 +23,7 @@ jobs:
       - name: Install
         run: yarn install
       - name: lint
-        run: npx nx affected --target=lint --base=${{github.sha}} --head= ${{github.event.pull_request.base.sha }}
+        run: npx nx affected --target=lint --base=${{github.sha}} --head= ${{github.event.pull_request.base.sha }} --parallel=3
       - name: format
         run: npx nx format:check --base=${{github.sha}} --head= ${{github.event.pull_request.base.sha }}
       - name: typing
