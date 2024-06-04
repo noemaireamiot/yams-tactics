@@ -7,8 +7,10 @@ import {
   Game,
 } from '@yams-tactics/backend-database';
 import {
+  Action,
   ActionTypeEnum,
   UserModel,
+  actionDefinition,
   computeDicesRoll,
 } from '@yams-tactics/domain';
 
@@ -21,7 +23,7 @@ export class PlayerService extends CrudService(Player) {
     super(playerRepo);
   }
 
-  actions(type: ActionTypeEnum, currentUser: UserModel) {
+  actions(action: Action, currentUser: UserModel) {
     const game = this.gameRepo.findOneWhere(
       (game) =>
         !!game.players.find((player) => player.user.id === currentUser.id)
@@ -31,7 +33,7 @@ export class PlayerService extends CrudService(Player) {
       (player) => player.user.id === currentUser.id
     );
 
-    switch (type) {
+    switch (action.type) {
       case ActionTypeEnum.roll_dices: {
         game.players = game.players.map((p) => {
           if (p.id !== player.id) {
@@ -41,9 +43,17 @@ export class PlayerService extends CrudService(Player) {
           const faces = computeDicesRoll(player);
           return {
             ...p,
-            actions: [...player.actions, { type: ActionTypeEnum.roll_dices }],
+            actions: [
+              ...player.actions,
+              actionDefinition.roll_dices(action.dices),
+            ],
             dices: player.dices.map((dice, i) => {
-              return { ...dice, currentFace: faces[i] };
+              return {
+                ...dice,
+                currentFace: action.dices.includes(i)
+                  ? faces[i]
+                  : dice.currentFace,
+              };
             }),
           };
         });
@@ -51,7 +61,7 @@ export class PlayerService extends CrudService(Player) {
         break;
       }
       default: {
-        console.info(`action type ${type} unknown`);
+        console.info(`action type ${action.type} unknown`);
       }
     }
   }

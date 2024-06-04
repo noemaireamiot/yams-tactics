@@ -1,6 +1,6 @@
-import { ActionTypeEnum } from '../../enum';
 import { GameModel } from '../../model';
 import { computeDicesRoll } from './dice';
+import { actionDefinition } from './player';
 import { getRoundFromTime, maxTime } from './round.definition';
 
 export function gameLoop(
@@ -18,7 +18,10 @@ export function gameLoop(
           const faces = computeDicesRoll(player);
           return {
             ...player,
-            actions: [...player.actions, { type: ActionTypeEnum.roll_dices }],
+            actions: [
+              ...player.actions,
+              actionDefinition.roll_dices(player.dices.map((_, i) => i)),
+            ],
             dices: player.dices.map((dice, i) => {
               return { ...dice, currentFace: faces[i] };
             }),

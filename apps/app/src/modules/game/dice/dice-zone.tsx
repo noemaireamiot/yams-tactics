@@ -1,46 +1,72 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './dice-zone.scss';
 import { Dice } from './components';
 import {
-  ActionTypeEnum,
   PlayerModel,
+  actionDefinition,
   computeDicesRoll,
 } from '@yams-tactics/domain';
 import { usePlayerActions } from '@yams-tactics/frontend-common';
 
 export function DiceZone({ player }: { player: PlayerModel | null }) {
-  const [dicesValue, setDicesValue] = useState<number[]>(
-    player?.dices.map((dice) => dice.currentFace?.value ?? 1) || [1, 1, 1, 1, 1]
-  );
+  const [statePlayer, setStatePlayer] = useState(player);
+  useEffect(() => {
+    setStatePlayer(player);
+  }, [player]);
+
+  const [lockedDices, setLockedDices] = useState<number[]>([]);
+  const onDiceClick = (index: number) => {
+    setLockedDices((lockedDices) =>
+      lockedDices.includes(index)
+        ? lockedDices.filter((d) => d === index)
+        : [...lockedDices, index]
+    );
+  };
+
+  const onRollClick = async () => {
+    if (statePlayer) {
+      const action = actionDefinition.roll_dices(diceToBeRolled);
+      await playerActions(action);
+      const updatedPlayer = {
+        ...statePlayer,
+        actions: [...statePlayer.actions, action],
+      };
+      const faces = computeDicesRoll(updatedPlayer);
+      updatedPlayer.dices = statePlayer.dices.map((dice, i) => ({
+        ...dice,
+        currentFace: diceToBeRolled.includes(i) ? faces[i] : dice.currentFace,
+      }));
+
+      setStatePlayer(updatedPlayer);
+
+      setLockedDices([]);
+    }
+  };
+
+  const diceToBeRolled = (player?.dices ?? []).reduce<number[]>((acc, _, i) => {
+    return lockedDices.includes(i) ? acc : [...acc, i];
+  }, []);
   const { mutateAsync: playerActions } = usePlayerActions();
   const [isRotating, setIsRotating] = useState(false);
 
   const resetDice = () => {
-    setDicesValue([]);
     setIsRotating(true);
   };
   return (
     <div className="w-full h-full">
-      <button
-        onClick={async () => {
-          if (player) {
-            await playerActions({ type: ActionTypeEnum.roll_dices });
-            player.actions.push({ type: ActionTypeEnum.roll_dices });
-            const face = computeDicesRoll(player);
-            setDicesValue(player.dices.map((dice, i) => face[i].value));
-          }
-        }}
-      >
-        Launch dice
-      </button>
+      <button onClick={onRollClick}>Launch dice</button>
       <button onClick={resetDice}>Reset dice</button>
       <div className={styles.play}>
         <div className={styles.dices}>
-          <Dice value={dicesValue?.[0]} rotating={isRotating} />
-          <Dice value={dicesValue?.[1]} rotating={isRotating} />
-          <Dice value={dicesValue?.[2]} rotating={isRotating} />
-          <Dice value={dicesValue?.[3]} rotating={isRotating} />
-          <Dice value={dicesValue?.[4]} rotating={isRotating} />
+          {(statePlayer?.dices ?? []).map((dice, index) => (
+            <Dice
+              key={dice.id}
+              value={dice.currentFace?.value}
+              selected={lockedDices.includes(index)}
+              onClick={() => onDiceClick(index)}
+              rotating={isRotating}
+            />
+          ))}
         </div>
       </div>
     </div>
