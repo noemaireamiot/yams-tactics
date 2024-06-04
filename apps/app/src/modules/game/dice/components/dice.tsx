@@ -15,22 +15,22 @@ export function Dice({ value, onClick, rotating = false }: diceInterface) {
       }`}
     >
       <div className={`${styles.box} ${styles.box1}`}>
-        <img src="../../../assets/dice_1.jpg" />
+        <img src="../../../assets/dice_1.svg" />
       </div>
       <div className={`${styles.box} ${styles.box2}`}>
-        <img src="../../../assets/dice_2.jpg" />
+        <img src="../../../assets/dice_2.svg" />
       </div>
       <div className={`${styles.box} ${styles.box3}`}>
-        <img src="../../../assets/dice_3.jpg" />
+        <img src="../../../assets/dice_3.svg" />
       </div>
       <div className={`${styles.box} ${styles.box4}`}>
-        <img src="../../../assets/dice_4.jpg" />
+        <img src="../../../assets/dice_4.svg" />
       </div>
       <div className={`${styles.box} ${styles.box5}`}>
-        <img src="../../../assets/dice_5.jpg" />
+        <img src="../../../assets/dice_5.svg" />
       </div>
       <div className={`${styles.box} ${styles.box6}`}>
-        <img src="../../../assets/dice_6.jpg" />
+        <img src="../../../assets/dice_6.svg" />
       </div>
     </div>
   );
