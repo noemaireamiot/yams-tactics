@@ -14,6 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -21,6 +23,10 @@ jobs:
       - name: Install
         run: yarn install
       - name: lint
-        run: nx affected --target=lint --base=${{github.sha}} --head=main
+        run: npx nx affected --target=lint --base=${{github.sha}} --head= ${{github.event.pull_request.base.sha }} --parallel=3
       - name: format
-        run: nx format:check --base=${{github.sha}} --head=main
+        run: npx nx format:check --base=${{github.sha}} --head= ${{github.event.pull_request.base.sha }}
+      - name: typing
+        run: npx nx affected --target=typing --base=${{github.sha}} --head=${{github.event.pull_request.base.sha}} --parallel=3
+      - name: test
+        run: npx nx affected --target=test --base=${{github.sha}} --head=${{github.event.pull_request.base.sha}} --parallel=3
