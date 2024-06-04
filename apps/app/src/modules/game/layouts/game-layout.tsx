@@ -10,8 +10,8 @@ import { PropsWithChildren } from 'react';
 import styles from './game-layout.scss';
 
 interface GameLayoutProps {
-  game: GameModel | null;
-  currentPlayer: PlayerModel | null;
+  game?: GameModel;
+  currentPlayer?: PlayerModel;
 }
 
 export function GameLayout({

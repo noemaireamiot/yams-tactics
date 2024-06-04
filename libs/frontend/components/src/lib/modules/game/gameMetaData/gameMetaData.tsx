@@ -4,8 +4,8 @@ import { GameModel, PlayerModel } from '@yams-tactics/domain';
 
 interface GameMetaDataProps {
   className?: string;
-  game: GameModel | null;
-  currentPlayer: PlayerModel | null;
+  game?: GameModel;
+  currentPlayer?: PlayerModel;
 }
 
 export function GameMetaData({
