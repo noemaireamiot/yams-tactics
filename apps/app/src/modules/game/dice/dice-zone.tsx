@@ -4,7 +4,7 @@ import { Dice } from './components';
 import {
   PlayerModel,
   actionDefinition,
-  computeDicesRoll,
+  onRollDices,
 } from '@yams-tactics/domain';
 import { usePlayerActions } from '@yams-tactics/frontend-common';
 
@@ -27,17 +27,10 @@ export function DiceZone({ player }: { player: PlayerModel | null }) {
     if (statePlayer) {
       const action = actionDefinition.roll_dices(diceToBeRolled);
       await playerActions(action);
-      const updatedPlayer = {
-        ...statePlayer,
-        actions: [...statePlayer.actions, action],
-      };
-      const faces = computeDicesRoll(updatedPlayer);
-      updatedPlayer.dices = statePlayer.dices.map((dice, i) => ({
-        ...dice,
-        currentFace: diceToBeRolled.includes(i) ? faces[i] : dice.currentFace,
-      }));
 
-      setStatePlayer(updatedPlayer);
+      onRollDices(statePlayer, diceToBeRolled, (player) => {
+        setStatePlayer(player);
+      });
 
       setLockedDices([]);
     }

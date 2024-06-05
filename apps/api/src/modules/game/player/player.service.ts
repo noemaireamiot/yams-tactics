@@ -10,8 +10,7 @@ import {
   Action,
   ActionTypeEnum,
   UserModel,
-  actionDefinition,
-  computeDicesRoll,
+  onRollDices,
 } from '@yams-tactics/domain';
 
 @Injectable()
@@ -35,29 +34,13 @@ export class PlayerService extends CrudService(Player) {
 
     switch (action.type) {
       case ActionTypeEnum.roll_dices: {
-        game.players = game.players.map((p) => {
-          if (p.id !== player.id) {
-            return p;
-          }
+        onRollDices(player, action.dices, async (player) => {
+          game.players = game.players.map((p) =>
+            p.id === player.id ? player : p
+          );
 
-          const faces = computeDicesRoll(player);
-          return {
-            ...p,
-            actions: [
-              ...player.actions,
-              actionDefinition.roll_dices(action.dices),
-            ],
-            dices: player.dices.map((dice, i) => {
-              return {
-                ...dice,
-                currentFace: action.dices.includes(i)
-                  ? faces[i]
-                  : dice.currentFace,
-              };
-            }),
-          };
+          await this.gameRepo.updateOne(game.id, game);
         });
-        this.gameRepo.updateOne(game.id, game);
         break;
       }
       default: {
