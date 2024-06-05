@@ -1,4 +1,6 @@
 import { Router, useAuth } from '@yams-tactics/frontend-common';
+import { TextField, Button } from '@yams-tactics/frontend-components';
+import styles from './auth.scss';
 import { FormEventHandler } from 'react';
 
 export function Login() {
@@ -12,11 +14,12 @@ export function Login() {
     await passwordLogin(name);
   };
   return (
-    <div>
+    <div className={styles.container}>
       <form onSubmit={onSubmit}>
-        <label htmlFor="name">Name</label>
-        <input autoFocus name="name"></input>
-        <button type="submit">Login</button>
+        <TextField autoFocus name="name" label="Name" />
+        <Button color="yellow" type="submit" className="btn-w-full">
+          Login
+        </Button>
       </form>
       <a href={Router.Register()}>Register</a>
     </div>

@@ -11,7 +11,7 @@ import {
   useRoom,
   useStartGame,
 } from '@yams-tactics/frontend-common';
-import { Redirect, UserCard } from '@yams-tactics/frontend-components';
+import { Button, Redirect, UserCard } from '@yams-tactics/frontend-components';
 import { v4 } from 'uuid';
 
 const botAvatar =
@@ -62,7 +62,8 @@ export function RoomPage({ roomId }: { roomId: string }) {
         </div>
       </div>
       <div className="flex">
-        <button
+        <Button
+          color="blue"
           disabled={joined}
           onClick={async () => {
             await joinRoom({ id: roomId });
@@ -70,15 +71,16 @@ export function RoomPage({ roomId }: { roomId: string }) {
           }}
         >
           join
-        </button>
-        <button
+        </Button>
+        <Button
+          color="yellow"
           onClick={async () => {
             const { game } = await startGame({ id: roomId });
             if (game) Router.push('Game', { gameId: game.id });
           }}
         >
           start
-        </button>
+        </Button>
       </div>
     </div>
   );

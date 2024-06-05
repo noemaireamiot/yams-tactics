@@ -2,13 +2,16 @@ $SPACE_UNIT: 4;
 
 // This feel awful 🤡
 
-
 :global .h-full {
   height: 100%;
 }
 
 :global .w-full {
   width: 100%;
+}
+
+:global .btn-w-full {
+  width: calc(var(--d) + 100%);
 }
 
 :global .flex {
@@ -24,7 +27,7 @@ $SPACE_UNIT: 4;
 }
 
 :global .justify-right {
-  justify-content: right; 
+  justify-content: right;
 }
 
 :global .justify-center {
@@ -54,8 +57,6 @@ $SPACE_UNIT: 4;
 :global .font-XL {
   font-size: 4em;
 }
-
-
 
 :global .ellipsis {
   overflow: hidden;

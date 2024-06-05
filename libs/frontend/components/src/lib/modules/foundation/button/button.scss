@@ -1,0 +1,80 @@
+.btn {
+  --bg: #f3eed9; /* the background color */
+  &__yellow {
+    --c: #ddab40; /* the color */
+  }
+
+  &__red {
+    --c: #c1554d; /* the color */
+  }
+
+  &__blue {
+    --c: #009683; /* the color */
+  }
+
+  &__brown {
+    --c: #624100; /* the color */
+  }
+
+  --b: 0.2em; /* border length*/
+  --d: 10px; /* the cube depth */
+
+  --_s: calc(var(--d) + var(--b));
+
+  margin-top: 10px;
+  color: var(--c);
+  font-family: 'Alata', sans-serif;
+  font-size: 1.5em;
+  cursor: pointer;
+  border: solid #0000;
+  border-width: var(--b) var(--b) var(--_s) var(--_s);
+  background: conic-gradient(
+        at left var(--d) bottom var(--d),
+        #0000 90deg,
+        rgb(255 255 255 /0.3) 0 225deg,
+        rgb(255 255 255 /0.6) 0
+      )
+      border-box,
+    conic-gradient(at left var(--_s) bottom var(--_s), #0000 90deg, var(--c) 0)
+      0 100% / calc(100% - var(--b)) calc(100% - var(--b)) border-box;
+  transform: translate(calc(var(--d) / -1), var(--d));
+  clip-path: polygon(
+    var(--d) 0%,
+    var(--d) 0%,
+    100% 0%,
+    100% calc(100% - var(--d)),
+    100% calc(100% - var(--d)),
+    var(--d) calc(100% - var(--d))
+  );
+  transition: 0.3s;
+
+  padding: 5px 15px;
+  background-color: var(--bg);
+  font-weight: bold;
+
+  &:hover {
+    transform: translate(0, 0);
+    clip-path: polygon(
+      0% var(--d),
+      var(--d) 0%,
+      100% 0%,
+      100% calc(100% - var(--d)),
+      calc(100% - var(--d)) 100%,
+      0% 100%
+    );
+  }
+
+  &:active {
+    transition: 0s;
+
+    transform: translate(calc(var(--d) / -1), var(--d));
+    clip-path: polygon(
+      var(--d) 0%,
+      var(--d) 0%,
+      100% 0%,
+      100% calc(100% - var(--d)),
+      100% calc(100% - var(--d)),
+      var(--d) calc(100% - var(--d))
+    );
+  }
+}

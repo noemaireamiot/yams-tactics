@@ -1,0 +1,19 @@
+.textField {
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    font-weight: bold;
+  }
+  &__field {
+    font-family: 'Alata', sans-serif;
+    border: 3px solid #ddab40;
+    background: transparent;
+    padding: 1rem;
+    font-size: 1em;
+    border-radius: 10px;
+    outline: none;
+    color: #ddab40;
+  }
+}

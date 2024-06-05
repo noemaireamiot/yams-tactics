@@ -1,5 +1,6 @@
 import { Link } from '@swan-io/chicane';
 import { Router, useCreateRoom, useRooms } from '@yams-tactics/frontend-common';
+import { Button } from '@yams-tactics/frontend-components';
 
 export function RoomListPage() {
   const { data: rooms, isLoading, refetch } = useRooms();
@@ -8,7 +9,7 @@ export function RoomListPage() {
   return (
     <div>
       <h1>Rooms:</h1>
-      <button
+      <Button
         onClick={async () => {
           const room = await createRoom();
           refetch();
@@ -16,7 +17,7 @@ export function RoomListPage() {
         }}
       >
         Create room
-      </button>
+      </Button>
       <div>
         {isLoading && <p>Loading</p>}
         {!isLoading && (

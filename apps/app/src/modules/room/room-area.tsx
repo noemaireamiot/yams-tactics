@@ -4,7 +4,7 @@ import {
   UserAuthContext,
   useAuth,
 } from '@yams-tactics/frontend-common';
-import { Redirect } from '@yams-tactics/frontend-components';
+import { Button, Redirect } from '@yams-tactics/frontend-components';
 import { IsAuthenticatedConsoleGuard } from '../../shared';
 import { RoomPage } from './page';
 import { RoomListPage } from './list';
@@ -26,8 +26,10 @@ export const RoomArea = () => {
               <Redirect to={Router.Login()}></Redirect>
             ))}
         </div>
-        <div className="h-8 flex justify-right">
-          <button onClick={logout}>logout</button>
+        <div className="flex justify-right">
+          <Button color="red" onClick={logout}>
+            logout
+          </Button>
         </div>
       </div>
     </IsAuthenticatedConsoleGuard>
