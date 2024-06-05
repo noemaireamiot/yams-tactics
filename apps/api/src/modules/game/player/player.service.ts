@@ -22,7 +22,7 @@ export class PlayerService extends CrudService(Player) {
     super(playerRepo);
   }
 
-  actions(action: Action, currentUser: UserModel) {
+  async actions(action: Action, currentUser: UserModel) {
     const game = this.gameRepo.findOneWhere(
       (game) =>
         !!game.players.find((player) => player.user.id === currentUser.id)
@@ -34,7 +34,7 @@ export class PlayerService extends CrudService(Player) {
 
     switch (action.type) {
       case ActionTypeEnum.roll_dices: {
-        onRollDices(player, action.dices, async (player) => {
+        await onRollDices(player, action.dices, async (player) => {
           game.players = game.players.map((p) =>
             p.id === player.id ? player : p
           );

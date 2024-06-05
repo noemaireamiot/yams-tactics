@@ -20,7 +20,10 @@ export class PlayerController extends CrudController(Player, {
   }
 
   @Post('/actions')
-  actions(@Body() { action }: ActionInput, @CurrentUser() user: UserModel) {
-    this.service.actions(action, user);
+  async actions(
+    @Body() { action }: ActionInput,
+    @CurrentUser() user: UserModel
+  ) {
+    await this.service.actions(action, user);
   }
 }
