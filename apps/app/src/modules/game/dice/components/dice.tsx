@@ -4,19 +4,13 @@ interface diceInterface {
   value?: number;
   onClick?: () => void;
   selected?: boolean;
-  rotating?: boolean;
 }
 
-export function Dice({
-  value,
-  onClick,
-  rotating = false,
-  selected,
-}: diceInterface) {
+export function Dice({ value, onClick, selected }: diceInterface) {
   return (
     <div
       onClick={onClick}
-      className={`${styles.cube} ${rotating ? styles.rotating : ''} ${
+      className={`${styles.cube} ${styles[`rotating_${value}`]} ${
         selected ? styles.selected : ''
       } ${value ? styles[`value_${value}`] : ''}`}
     >

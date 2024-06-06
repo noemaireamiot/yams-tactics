@@ -7,6 +7,7 @@ import {
   onRollDices,
 } from '@yams-tactics/domain';
 import { usePlayerActions } from '@yams-tactics/frontend-common';
+import { Button } from '@yams-tactics/frontend-components';
 
 export function DiceZone({ player }: { player: PlayerModel | null }) {
   const round = 'dice.1';
@@ -24,6 +25,10 @@ export function DiceZone({ player }: { player: PlayerModel | null }) {
     );
   };
 
+  const diceToBeRolled = (player?.dices ?? []).reduce<number[]>((acc, _, i) => {
+    return lockedDices.includes(i) ? acc : [...acc, i];
+  }, []);
+
   const onRollClick = async () => {
     if (statePlayer) {
       const action = actionDefinition.roll_dices(diceToBeRolled, round);
@@ -40,19 +45,13 @@ export function DiceZone({ player }: { player: PlayerModel | null }) {
     }
   };
 
-  const diceToBeRolled = (player?.dices ?? []).reduce<number[]>((acc, _, i) => {
-    return lockedDices.includes(i) ? acc : [...acc, i];
-  }, []);
   const { mutateAsync: playerActions } = usePlayerActions();
-  const [isRotating, setIsRotating] = useState(false);
 
-  const resetDice = () => {
-    setIsRotating(true);
-  };
   return (
     <div className="w-full h-full">
-      <button onClick={onRollClick}>Launch dice</button>
-      <button onClick={resetDice}>Reset dice</button>
+      <Button color="blue" onClick={onRollClick}>
+        Launch dice
+      </Button>
       <div className={styles.play}>
         <div className={styles.dices}>
           {(statePlayer?.dices ?? []).map((dice, index) => (
@@ -61,7 +60,6 @@ export function DiceZone({ player }: { player: PlayerModel | null }) {
               value={dice.currentFace?.value}
               selected={lockedDices.includes(index)}
               onClick={() => onDiceClick(index)}
-              rotating={isRotating}
             />
           ))}
         </div>
