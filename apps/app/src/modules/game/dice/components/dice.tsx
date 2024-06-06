@@ -3,16 +3,22 @@ import styles from './dice.scss';
 interface diceInterface {
   value?: number;
   onClick?: () => void;
+  selected?: boolean;
   rotating?: boolean;
 }
 
-export function Dice({ value, onClick, rotating = false }: diceInterface) {
+export function Dice({
+  value,
+  onClick,
+  rotating = false,
+  selected,
+}: diceInterface) {
   return (
     <div
       onClick={onClick}
       className={`${styles.cube} ${rotating ? styles.rotating : ''} ${
-        value ? styles[`value_${value}`] : ''
-      }`}
+        selected ? styles.selected : ''
+      } ${value ? styles[`value_${value}`] : ''}`}
     >
       <div className={`${styles.box} ${styles.box1}`}>
         <img src="../../../assets/dice_1.svg" />

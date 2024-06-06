@@ -1,18 +1,16 @@
 import { Tag } from '../tag';
-import styles from './gameMetaData.scss';
-import { GameModel, PlayerModel } from '@yams-tactics/domain';
+import styles from './game-meta-data.scss';
+import { PlayerModel } from '@yams-tactics/domain';
+import { useGameContext } from '@yams-tactics/frontend-common';
 
 interface GameMetaDataProps {
   className?: string;
-  game: GameModel | null;
-  currentPlayer: PlayerModel | null;
+  currentPlayer?: PlayerModel;
 }
 
-export function GameMetaData({
-  className,
-  game,
-  currentPlayer,
-}: GameMetaDataProps) {
+export function GameMetaData({ className, currentPlayer }: GameMetaDataProps) {
+  const { game } = useGameContext();
+
   return (
     <div className={`${className || ''}`}>
       <div className={`border-radius ${styles.metadataWrapper}`}>

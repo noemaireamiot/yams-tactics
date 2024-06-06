@@ -1,17 +1,17 @@
-import { PlayerModel } from '@yams-tactics/domain';
 import styles from './leader-board.scss';
 import { PlayerBoard } from '../player-board';
+import { useGameContext } from '@yams-tactics/frontend-common';
 
 interface LeaderBoardProps {
-  leaderboard: PlayerModel[];
   className?: string;
 }
 
-export function LeaderBoard({ leaderboard, className = '' }: LeaderBoardProps) {
+export function LeaderBoard({ className = '' }: LeaderBoardProps) {
+  const { game } = useGameContext();
   return (
     <div className={`${className}`}>
       <div className={`border-radius ${styles.metadataWrapper}`}>
-        {leaderboard.map((player) => (
+        {game?.players.map((player) => (
           <PlayerBoard key={player.id} player={player} />
         ))}
       </div>

@@ -7,9 +7,10 @@ import {
   Game,
 } from '@yams-tactics/backend-database';
 import {
+  Action,
   ActionTypeEnum,
   UserModel,
-  computeDicesRoll,
+  onRollDices,
 } from '@yams-tactics/domain';
 
 @Injectable()
@@ -21,7 +22,7 @@ export class PlayerService extends CrudService(Player) {
     super(playerRepo);
   }
 
-  actions(type: ActionTypeEnum, currentUser: UserModel) {
+  async actions(action: Action, currentUser: UserModel) {
     const game = this.gameRepo.findOneWhere(
       (game) =>
         !!game.players.find((player) => player.user.id === currentUser.id)
@@ -31,27 +32,22 @@ export class PlayerService extends CrudService(Player) {
       (player) => player.user.id === currentUser.id
     );
 
-    switch (type) {
+    switch (action.type) {
       case ActionTypeEnum.roll_dices: {
-        game.players = game.players.map((p) => {
-          if (p.id !== player.id) {
-            return p;
-          }
+        await onRollDices(
+          { player, dices: action.dices, round: action.round },
+          async (player) => {
+            game.players = game.players.map((p) =>
+              p.id === player.id ? player : p
+            );
 
-          const faces = computeDicesRoll(player);
-          return {
-            ...p,
-            actions: [...player.actions, { type: ActionTypeEnum.roll_dices }],
-            dices: player.dices.map((dice, i) => {
-              return { ...dice, currentFace: faces[i] };
-            }),
-          };
-        });
-        this.gameRepo.updateOne(game.id, game);
+            await this.gameRepo.updateOne(game.id, game);
+          }
+        );
         break;
       }
       default: {
-        console.info(`action type ${type} unknown`);
+        console.info(`action type ${action.type} unknown`);
       }
     }
   }

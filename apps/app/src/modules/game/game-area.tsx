@@ -1,5 +1,6 @@
 import { match } from 'ts-pattern';
 import {
+  GameContextProvider,
   Router,
   UserAuthContext,
   useAuth,
@@ -18,7 +19,9 @@ export const GameArea = () => {
         <div className="h-full">
           {match(route)
             .with({ name: 'Game' }, ({ params: { gameId } }) => (
-              <GamePage gameId={gameId} />
+              <GameContextProvider gameId={gameId}>
+                <GamePage />
+              </GameContextProvider>
             ))
             .otherwise(() => (
               <Redirect to={Router.Login()}></Redirect>
