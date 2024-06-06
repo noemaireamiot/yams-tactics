@@ -1,15 +1,22 @@
-import { PlayerModel } from '../../../../model';
+import { PlayerModel, Round } from '../../../../model';
 import { computeDicesRoll } from '../../dice';
 import { actionDefinition } from '../action.definition';
 
 export async function onRollDices(
-  player: PlayerModel,
-  dices: number[],
+  {
+    player,
+    dices,
+    round,
+  }: {
+    player: PlayerModel;
+    dices: number[];
+    round: Round;
+  },
   onUpdatePlayer: (player: PlayerModel) => Promise<void> | void
 ) {
   const updatedPlayer = {
     ...player,
-    actions: [...player.actions, actionDefinition.roll_dices(dices)],
+    actions: [...player.actions, actionDefinition.roll_dices(dices, round)],
   };
 
   const faces = computeDicesRoll(player);

@@ -34,13 +34,16 @@ export class PlayerService extends CrudService(Player) {
 
     switch (action.type) {
       case ActionTypeEnum.roll_dices: {
-        await onRollDices(player, action.dices, async (player) => {
-          game.players = game.players.map((p) =>
-            p.id === player.id ? player : p
-          );
+        await onRollDices(
+          { player, dices: action.dices, round: action.round },
+          async (player) => {
+            game.players = game.players.map((p) =>
+              p.id === player.id ? player : p
+            );
 
-          await this.gameRepo.updateOne(game.id, game);
-        });
+            await this.gameRepo.updateOne(game.id, game);
+          }
+        );
         break;
       }
       default: {

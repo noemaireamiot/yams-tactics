@@ -1,14 +1,16 @@
-import { ScoreboardModel } from '@yams-tactics/domain';
 import { useTranslation } from 'react-i18next';
 import styles from './scoreboard.scss';
+import { useGameContext } from '@yams-tactics/frontend-common';
 
 interface ScoreBoardProps {
-  scoreboard: ScoreboardModel | null;
   className?: string;
 }
 
-export function ScoreBoard({ scoreboard, className = '' }: ScoreBoardProps) {
+export function ScoreBoard({ className = '' }: ScoreBoardProps) {
   const { t } = useTranslation();
+  const { currentPlayer } = useGameContext();
+  const scoreboard = currentPlayer?.scoreboard;
+
   return (
     <div className={`${className} ${styles.scoreboard} shadow`}>
       <table>

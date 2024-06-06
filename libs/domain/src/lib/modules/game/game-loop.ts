@@ -1,39 +1,50 @@
 import { GameModel } from '../../model';
-import { computeDicesRoll } from './dice';
-import { actionDefinition } from './player';
+import { onRollDices } from './player';
 import { getRoundFromTime, maxTime } from './round.definition';
+
+export const GAME_RATE = 3000;
 
 export function gameLoop(
   game: GameModel,
-  { gameUpdateFn }: { gameUpdateFn: (game: GameModel) => void }
-) {
-  const interval = setInterval(() => {
-    const time = (+new Date() - +game.startedAt) / 1000;
-    console.info('loop game: ', game.id);
-
+  {
+    gameRate = GAME_RATE,
+    gameUpdateFn,
+  }: { gameRate?: number; gameUpdateFn: (game: GameModel) => void }
+): { clearInterval: () => void } {
+  const interval = setInterval(async () => {
+    const startedAt = new Date(game.startedAt);
+    const time = (+new Date() - +startedAt) / 1000;
     const currentRound = getRoundFromTime(time).round;
+
     if (currentRound !== game.currentRound) {
       if (currentRound.startsWith('dice')) {
-        game.players = game.players.map((player) => {
-          const faces = computeDicesRoll(player);
-          return {
-            ...player,
-            actions: [
-              ...player.actions,
-              actionDefinition.roll_dices(player.dices.map((_, i) => i)),
-            ],
-            dices: player.dices.map((dice, i) => {
-              return { ...dice, currentFace: faces[i] };
-            }),
-          };
-        });
+        await Promise.all(
+          game.players.map(async (player, i) => {
+            await onRollDices(
+              {
+                player,
+                dices: player.dices.map((_, i) => i),
+                round: currentRound,
+              },
+              async (player) => {
+                game.players[i] = player;
+              }
+            );
+          })
+        );
       }
+
       game.currentRound = currentRound;
     }
 
     gameUpdateFn(game);
+
     if (time > maxTime) {
       clearInterval(interval);
     }
-  }, 1000);
+  }, gameRate);
+
+  return {
+    clearInterval: () => clearInterval(interval),
+  };
 }

@@ -9,6 +9,7 @@ import {
 import { usePlayerActions } from '@yams-tactics/frontend-common';
 
 export function DiceZone({ player }: { player: PlayerModel | null }) {
+  const round = 'dice.1';
   const [statePlayer, setStatePlayer] = useState(player);
   useEffect(() => {
     setStatePlayer(player);
@@ -25,12 +26,15 @@ export function DiceZone({ player }: { player: PlayerModel | null }) {
 
   const onRollClick = async () => {
     if (statePlayer) {
-      const action = actionDefinition.roll_dices(diceToBeRolled);
+      const action = actionDefinition.roll_dices(diceToBeRolled, round);
       await playerActions(action);
 
-      onRollDices(statePlayer, diceToBeRolled, (player) => {
-        setStatePlayer(player);
-      });
+      onRollDices(
+        { player: statePlayer, dices: diceToBeRolled, round },
+        (player) => {
+          setStatePlayer(player);
+        }
+      );
 
       setLockedDices([]);
     }

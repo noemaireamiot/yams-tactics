@@ -1,7 +1,6 @@
 import { Round } from '../../model';
+import { ROUND_BASE_TIME, ROUND_COUNT } from './constants';
 
-export const ROUND_COUNT = 13;
-export const ROUND_BASE_TIME = 30;
 export const roundDefinition: Partial<Record<Round, { time: number }>> = {};
 
 export function getRoundDefinition(round?: Round) {

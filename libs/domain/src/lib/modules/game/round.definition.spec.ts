@@ -1,4 +1,5 @@
-import { ROUND_BASE_TIME, getRoundFromTime } from './round.definition';
+import { ROUND_BASE_TIME } from './constants';
+import { getRoundFromTime } from './round.definition';
 
 describe('getRoundFromTime', () => {
   it.each([

@@ -1,4 +1,4 @@
-export * from './gameMetaData';
+export * from './game-meta-data';
 export * from './timer';
 export * from './scoreboard';
 export * from './leader-board';
