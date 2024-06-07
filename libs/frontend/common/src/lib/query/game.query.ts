@@ -10,7 +10,7 @@ export const useGame = (id: string) => {
   return useQuery<{ id: string }, unknown, GameModel>({
     queryKey: ['game', { id }],
     // @TODO - Replace with SSE ?
-    // refetchInterval: 5000,
+    refetchInterval: 3000,
     queryFn: async () => {
       const { data } = await axios.get(`${ENDPOINT}/${id}`, { ...authHeader });
 

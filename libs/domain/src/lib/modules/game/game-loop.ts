@@ -1,3 +1,4 @@
+import { ActionTypeEnum } from '../../enum';
 import { GameModel } from '../../model';
 import { onRollDices } from './player';
 import { getRoundFromTime, maxTime } from './round.definition';
@@ -20,16 +21,24 @@ export function gameLoop(
       if (currentRound.startsWith('dice')) {
         await Promise.all(
           game.players.map(async (player, i) => {
-            await onRollDices(
-              {
-                player,
-                dices: player.dices.map((_, i) => i),
-                round: currentRound,
-              },
-              async (player) => {
-                game.players[i] = player;
-              }
-            );
+            if (
+              !player.actions.find(
+                (action) =>
+                  action.type === ActionTypeEnum.roll_dices &&
+                  action.round === currentRound
+              )
+            ) {
+              await onRollDices(
+                {
+                  player,
+                  dices: player.dices.map((_, i) => i),
+                  round: currentRound,
+                },
+                async (player) => {
+                  game.players[i] = player;
+                }
+              );
+            }
           })
         );
       }
