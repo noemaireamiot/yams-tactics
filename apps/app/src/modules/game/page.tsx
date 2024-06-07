@@ -11,9 +11,7 @@ export function GamePage() {
 
   return (
     <GameLayout currentPlayer={currentPlayer}>
-      {game?.currentRound.startsWith('dice') && currentPlayer && (
-        <DiceZone player={currentPlayer} />
-      )}
+      {game?.currentRound.startsWith('dice') && currentPlayer && <DiceZone />}
       {game?.currentRound.startsWith('shop') && <div>SHOP</div>}
     </GameLayout>
   );
