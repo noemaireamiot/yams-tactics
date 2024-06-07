@@ -39,9 +39,9 @@ export function DiceZone() {
     );
     setAnimation(true);
     await dispatchRollDices(diceToBeRolled, round);
-    setLockedDices([]);
     setTimeout(() => {
       setAnimation(false);
+      setLockedDices([]);
     }, 1000);
   };
 
@@ -62,6 +62,7 @@ export function DiceZone() {
               value={dice.currentFace?.value}
               selected={lockedDices.includes(index)}
               onClick={() => onDiceClick(index)}
+              rotating={!lockedDices.includes(index) && animation}
             />
           ))}
         </div>

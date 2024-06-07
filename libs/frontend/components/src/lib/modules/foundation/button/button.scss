@@ -79,11 +79,7 @@
   }
 
   &:disabled {
-    transition: 0s;
-
-    transform: none;
-    clip-path: none;
-    cursor: not-allowed;
+    pointer-events: none;
     --c: gray;
   }
 }

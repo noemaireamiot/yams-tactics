@@ -4,15 +4,18 @@ interface diceInterface {
   value?: number;
   onClick?: () => void;
   selected?: boolean;
+  rotating?: boolean;
 }
 
-export function Dice({ value, onClick, selected }: diceInterface) {
+export function Dice({ value, onClick, selected, rotating }: diceInterface) {
   return (
     <div
       onClick={onClick}
-      className={`${styles.cube} ${styles[`rotating_${value}`]} ${
-        selected ? styles.selected : ''
-      } ${value ? styles[`value_${value}`] : ''}`}
+      className={`${styles.cube} ${
+        value && !rotating ? styles[`rotating_${value}`] : styles.rotating
+      } ${selected ? styles.selected : ''} ${
+        value ? styles[`value_${value}`] : ''
+      } ${rotating ? styles.rotating : ''}`}
     >
       <div className={`${styles.box} ${styles.box1}`}>
         <img src="../../../assets/dice_1.svg" />
