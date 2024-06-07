@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './dice-zone.scss';
 import { Dice } from './components';
-import {
-  PlayerModel,
-  actionDefinition,
-  onRollDices,
-} from '@yams-tactics/domain';
-import { usePlayerActions } from '@yams-tactics/frontend-common';
+import { canRollDiceThisRound } from '@yams-tactics/domain';
+import { useGameContext } from '@yams-tactics/frontend-common';
 import { Button } from '@yams-tactics/frontend-components';
 
-export function DiceZone({ player }: { player: PlayerModel | null }) {
-  const round = 'dice.1';
-  const [statePlayer, setStatePlayer] = useState(player);
-  useEffect(() => {
-    setStatePlayer(player);
-  }, [player]);
+export function DiceZone() {
+  const {
+    isLoading,
+    game,
+    currentPlayer,
+    onRollDices: dispatchRollDices,
+  } = useGameContext();
+  const round = game?.currentRound ?? 'dice.1';
+  const [animation, setAnimation] = useState(false);
 
   const [lockedDices, setLockedDices] = useState<number[]>([]);
   const onDiceClick = (index: number) => {
@@ -24,37 +23,40 @@ export function DiceZone({ player }: { player: PlayerModel | null }) {
         : [...lockedDices, index]
     );
   };
+  const canRoleDice =
+    currentPlayer && canRollDiceThisRound(currentPlayer, round);
 
-  const diceToBeRolled = (player?.dices ?? []).reduce<number[]>((acc, _, i) => {
-    return lockedDices.includes(i) ? acc : [...acc, i];
-  }, []);
+  if (isLoading) {
+    return null;
+  }
 
   const onRollClick = async () => {
-    if (statePlayer) {
-      const action = actionDefinition.roll_dices(diceToBeRolled, round);
-      await playerActions(action);
-
-      onRollDices(
-        { player: statePlayer, dices: diceToBeRolled, round },
-        (player) => {
-          setStatePlayer(player);
-        }
-      );
-
-      setLockedDices([]);
-    }
+    const diceToBeRolled = (currentPlayer?.dices ?? []).reduce<number[]>(
+      (acc, _, i) => {
+        return lockedDices.includes(i) ? acc : [...acc, i];
+      },
+      []
+    );
+    setAnimation(true);
+    await dispatchRollDices(diceToBeRolled, round);
+    setLockedDices([]);
+    setTimeout(() => {
+      setAnimation(false);
+    }, 1000);
   };
-
-  const { mutateAsync: playerActions } = usePlayerActions();
 
   return (
     <div className="w-full h-full">
-      <Button color="blue" onClick={onRollClick}>
+      <Button
+        color="blue"
+        disabled={!canRoleDice || animation}
+        onClick={onRollClick}
+      >
         Launch dice
       </Button>
       <div className={styles.play}>
         <div className={styles.dices}>
-          {(statePlayer?.dices ?? []).map((dice, index) => (
+          {(currentPlayer?.dices ?? []).map((dice, index) => (
             <Dice
               key={dice.id}
               value={dice.currentFace?.value}

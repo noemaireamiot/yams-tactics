@@ -77,4 +77,13 @@
       var(--d) calc(100% - var(--d))
     );
   }
+
+  &:disabled {
+    transition: 0s;
+
+    transform: none;
+    clip-path: none;
+    cursor: not-allowed;
+    --c: gray;
+  }
 }

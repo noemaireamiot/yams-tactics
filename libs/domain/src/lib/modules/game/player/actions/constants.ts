@@ -1,0 +1,1 @@
+export const MAX_DICE_ROLLS_ACTION_PER_ROUND = 3;
