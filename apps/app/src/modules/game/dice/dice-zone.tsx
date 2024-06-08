@@ -37,6 +37,8 @@ export function DiceZone() {
       },
       []
     );
+    // @TODO - Add a context for those dice animation to be able to display loading state on precompute
+
     setAnimation(true);
     await dispatchRollDices(diceToBeRolled, round);
     setTimeout(() => {

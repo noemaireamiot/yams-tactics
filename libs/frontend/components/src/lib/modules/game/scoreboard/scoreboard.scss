@@ -49,5 +49,10 @@
     &.rawName {
       border-right: 4px solid black;
     }
+
+    &.possible {
+      // @TODO - Replace hard coded value
+      color: darken($color: #ddab40, $amount: 0);
+    }
   }
 }
