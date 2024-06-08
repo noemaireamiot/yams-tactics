@@ -1,52 +1,10 @@
 import { ScoreTypeEnum } from '../../../enum';
 import { DiceModel } from '../../../model';
+import { findNOfAKind } from './find-n-of-a-kind';
+import { findNStraight } from './find-n-straight';
 
 const sumDice = (dices: DiceModel[]) =>
   dices.reduce((acc, dice) => acc + (dice.currentFace?.value ?? 0), 0);
-
-// Better unit test that some day
-const findNOfAKind = (n: number, dices: DiceModel[]) => {
-  const dicesPerFaceValue = dices.reduce<Record<number, number>>(
-    (acc, dice) => {
-      if (dice.currentFace)
-        return {
-          ...acc,
-          [dice.currentFace.value]: (acc[dice.currentFace.value] ?? 0) + 1,
-        };
-      return acc;
-    },
-    {}
-  );
-
-  const value = Object.entries(dicesPerFaceValue).find(
-    ([, value]) => value >= n
-  )?.[0];
-
-  return Number(value ?? 0);
-};
-
-// Better unit test that some day
-const findNStraight = (n: number, dices: DiceModel[]): boolean => {
-  const values = dices.map((dice) => dice.currentFace?.value ?? 0);
-  const sortedValues = [...new Set([...values])].sort((a, b) =>
-    a > b ? 1 : -1
-  );
-
-  let maxCount = 0;
-  let count = 1;
-  for (let i = 0; i < sortedValues.length - 1; i++) {
-    if (sortedValues[i] + 1 === sortedValues[i + 1]) {
-      count++;
-      if (count > maxCount) {
-        maxCount = count;
-      }
-    } else {
-      count = 0;
-    }
-  }
-
-  return maxCount >= n;
-};
 
 export const scoreboardDefinitions: Record<
   ScoreTypeEnum,
