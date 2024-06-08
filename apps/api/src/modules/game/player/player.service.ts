@@ -9,8 +9,10 @@ import {
 import {
   Action,
   ActionTypeEnum,
+  ScoreModel,
   UserModel,
   onRollDices,
+  onSubmitScore,
 } from '@yams-tactics/domain';
 
 @Injectable()
@@ -36,6 +38,25 @@ export class PlayerService extends CrudService(Player) {
       case ActionTypeEnum.roll_dices: {
         await onRollDices(
           { player, dices: action.dices, round: action.round },
+          async (player) => {
+            game.players = game.players.map((p) =>
+              p.id === player.id ? player : p
+            );
+
+            await this.gameRepo.updateOne(game.id, game);
+          }
+        );
+        break;
+      }
+      case ActionTypeEnum.submit_score: {
+        console.info(action);
+        await onSubmitScore(
+          {
+            player,
+            dices: action.dices,
+            round: action.round,
+            score: (action as { score: ScoreModel })?.score,
+          },
           async (player) => {
             game.players = game.players.map((p) =>
               p.id === player.id ? player : p

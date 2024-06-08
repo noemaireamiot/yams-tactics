@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import './scoreboard.scss';
-import { useGameContext } from '@yams-tactics/frontend-common';
+import { cls, useGameContext } from '@yams-tactics/frontend-common';
 import { scoreboardDefinitions } from '@yams-tactics/domain';
 
 interface ScoreBoardProps {
@@ -14,9 +14,9 @@ export function ScoreBoard({ className = '' }: ScoreBoardProps) {
   const scores = currentPlayer?.scoreboard.scores.map((score) => {
     return {
       ...score,
-      value: scoreboardDefinitions[score.type].computeValue(
-        currentPlayer.dices
-      ),
+      value: score.done
+        ? score.value
+        : scoreboardDefinitions[score.type].computeValue(currentPlayer.dices),
     };
   });
 
@@ -27,7 +27,7 @@ export function ScoreBoard({ className = '' }: ScoreBoardProps) {
           {(scores ?? []).map((score) => (
             <tr key={score.id}>
               <td className="rawName">{t(`scoreboard.${score.type}`)}</td>
-              <td className="possible">
+              <td className={cls(!score.done && 'possible')}>
                 {game?.currentRound.startsWith('shop')
                   ? score.done
                     ? score.value

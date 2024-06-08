@@ -32,9 +32,13 @@ export function useSubmitScore(
       await playerActions(action);
 
       onSubmitScore(
-        { player: getCurrentPlayer(state.game?.players), dices, round },
+        { player: getCurrentPlayer(state.game?.players), dices, round, score },
         (player) => {
-          dispatch({ type: ActionTypeEnum.roll_dices, currentPlayer: player });
+          dispatch({
+            type: ActionTypeEnum.submit_score,
+            currentPlayer: player,
+            score,
+          });
         }
       );
     },

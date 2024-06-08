@@ -1,5 +1,5 @@
 import { Round } from '../../model';
-import { ROUND_BASE_TIME, ROUND_COUNT } from './constants';
+import { ROUND_COUNT, ROUND_DICE_TIME, ROUND_SHOP_TIME } from './constants';
 
 export const roundDefinition: Partial<Record<Round, { time: number }>> = {};
 
@@ -7,7 +7,9 @@ export function getRoundDefinition(round?: Round) {
   const explicit = round && roundDefinition[round];
   if (explicit) return explicit;
 
-  return { time: ROUND_BASE_TIME };
+  return {
+    time: round?.startsWith('shop') ? ROUND_SHOP_TIME : ROUND_DICE_TIME,
+  };
 }
 
 export function roundsFactory() {

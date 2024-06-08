@@ -17,6 +17,7 @@ export async function onRollDices(
   onUpdatePlayer: (player: PlayerModel) => Promise<void> | void
 ) {
   if (!canRollDiceThisRound(player, round)) {
+    console.error('cannot roll dice');
     return;
   }
 
@@ -25,7 +26,7 @@ export async function onRollDices(
     actions: [...player.actions, actionDefinition.roll_dices({ dices, round })],
   };
 
-  const rolledDices = computeDicesRoll(player);
+  const rolledDices = computeDicesRoll(updatedPlayer);
 
   updatedPlayer.dices = player.dices.map((dice, i) => {
     if (!dices.map((dice) => dice.id).includes(dice.id)) {
@@ -41,6 +42,10 @@ export function canRollDiceThisRound(player: PlayerModel, round: Round) {
   const diceRollThisRound = player.actions.filter((action) => {
     return action.type === ActionTypeEnum.roll_dices && action.round === round;
   });
+
+  if (player.scoreboard.scores.every((score) => score.done)) {
+    return false;
+  }
 
   return diceRollThisRound.length < MAX_DICE_ROLLS_ACTION_PER_ROUND;
 }

@@ -40,13 +40,12 @@ export function gameReducer(
         ? state
         : {
             ...state,
-            // might not need that
-            // game: {
-            //   ...state.game,
-            //   players: state.game.players.map((p) =>
-            //     p.id === action.currentPlayer.id ? action.currentPlayer : p
-            //   ),
-            // },
+            game: {
+              ...state.game,
+              players: state.game.players.map((p) =>
+                p.id === action.currentPlayer.id ? action.currentPlayer : p
+              ),
+            },
             currentPlayer: action.currentPlayer,
           };
     }
