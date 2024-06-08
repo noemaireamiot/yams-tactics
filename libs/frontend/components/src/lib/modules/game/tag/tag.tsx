@@ -1,4 +1,4 @@
-import styles from './tag.scss';
+import './tag.scss';
 
 interface TagProps {
   label: string;
@@ -8,7 +8,7 @@ interface TagProps {
 
 export function Tag({ label, size = 'M', className = '' }: TagProps) {
   return (
-    <span className={`${className} border-radius font-${size} ${styles.tag}`}>
+    <span className={`${className} border-radius font-${size} ${'tag'}`}>
       {label}
     </span>
   );

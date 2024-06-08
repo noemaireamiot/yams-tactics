@@ -7,7 +7,7 @@ import {
   Timer,
 } from '@yams-tactics/frontend-components';
 import { PropsWithChildren } from 'react';
-import styles from './game-layout.scss';
+import './game-layout.scss';
 
 interface GameLayoutProps {
   game?: GameModel;
@@ -19,13 +19,13 @@ export function GameLayout({
   currentPlayer,
 }: PropsWithChildren<GameLayoutProps>) {
   return (
-    <div className={`${styles.container} h-full`}>
-      <GameMetaData className={styles.metadata} currentPlayer={currentPlayer} />
-      <Timer className={styles.timer} />
-      <ScoreBoard className={styles.scoreboard} />
-      <LeaderBoard className={styles.leaderboard} />
-      <div className={styles.content}>{children}</div>
-      <Stuff className={styles.stuff} />
+    <div className={`gameContainer h-full`}>
+      <GameMetaData className="metadata" currentPlayer={currentPlayer} />
+      <Timer className="timer" />
+      <ScoreBoard className="scoreboard" />
+      <LeaderBoard className="leaderboard" />
+      <div className="content">{children}</div>
+      <Stuff className="stuff" />
     </div>
   );
 }

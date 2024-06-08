@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './dice-zone.scss';
+import './dice-zone.scss';
 import { Dice } from './components';
 import { canRollDiceThisRound } from '@yams-tactics/domain';
 import { useGameContext } from '@yams-tactics/frontend-common';
@@ -56,8 +56,8 @@ export function DiceZone() {
       >
         Launch dice
       </Button>
-      <div className={styles.play}>
-        <div className={styles.dices}>
+      <div className={'play'}>
+        <div className={'dices'}>
           {(currentPlayer?.dices ?? []).map((dice, index) => (
             <Dice
               key={dice.id}

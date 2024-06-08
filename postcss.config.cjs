@@ -1,0 +1,2 @@
+// Really important !!
+module.exports = {};

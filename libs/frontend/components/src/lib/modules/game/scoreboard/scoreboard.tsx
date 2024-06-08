@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import styles from './scoreboard.scss';
+import './scoreboard.scss';
 import { useGameContext } from '@yams-tactics/frontend-common';
 import { scoreboardDefinitions } from '@yams-tactics/domain';
 
@@ -21,15 +21,15 @@ export function ScoreBoard({ className = '' }: ScoreBoardProps) {
   });
 
   return (
-    <div className={`${className} ${styles.scoreboard} shadow`}>
+    <div className={`bg-indigo-500 ${className} ${'scoreboard'} shadow`}>
       <table>
         <tbody>
           {(scores ?? []).map((score) => (
             <tr key={score.id}>
-              <td className={styles.rawName}>
+              <td className="rawName">
                 {t(`scoreboard.${score.type}`)}
               </td>
-              <td className={styles.possible}>
+              <td className="possible">
                 {game?.currentRound.startsWith('shop')
                   ? score.done
                     ? score.value

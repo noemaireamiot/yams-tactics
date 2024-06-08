@@ -1,5 +1,5 @@
 import { CSSProperties, useEffect, useRef, useState } from 'react';
-import styles from './timer.scss';
+import './timer.scss';
 import {
   Round,
   getRoundDefinition,
@@ -50,7 +50,7 @@ export function Timer({ className = '' }: { className?: string }) {
 
   return (
     <div
-      className={`${className} ${styles['progress-bar']} shadow`}
+      className={`${className} progress-bar shadow`}
       style={
         {
           '--percentage': `${percentage}%`,

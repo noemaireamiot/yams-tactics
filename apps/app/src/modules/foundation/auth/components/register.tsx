@@ -1,6 +1,6 @@
 import { Router, useAuth } from '@yams-tactics/frontend-common';
 import { Button, TextField } from '@yams-tactics/frontend-components';
-import styles from './auth.scss';
+import './auth.scss';
 import { FormEventHandler } from 'react';
 
 export function Register() {
@@ -15,7 +15,7 @@ export function Register() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={'containerAuth'}>
       <form onSubmit={onSubmit}>
         <TextField autoFocus name="name" label="Name" />
         <Button color="yellow" type="submit" className="btn-w-full">

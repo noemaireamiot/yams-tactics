@@ -7,6 +7,9 @@ const {
 } = require('@rspack/core');
 
 module.exports = composePlugins(withNx(), withReact(), (config) => {
+  config.module.rules[1].use.push('postcss-loader');
+  config.module.rules[1].type = 'css';
+  console.info(config.module.rules);
   return {
     ...config,
     plugins: [
