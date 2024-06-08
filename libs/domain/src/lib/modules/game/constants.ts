@@ -1,2 +1,2 @@
 export const ROUND_COUNT = 13;
-export const ROUND_BASE_TIME = 30;
+export const ROUND_BASE_TIME = 10;

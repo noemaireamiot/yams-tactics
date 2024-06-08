@@ -1,28 +1,10 @@
 import { ScoreTypeEnum } from '../../../enum';
 import { DiceModel } from '../../../model';
+import { findNOfAKind } from './find-n-of-a-kind';
+import { findNStraight } from './find-n-straight';
 
 const sumDice = (dices: DiceModel[]) =>
   dices.reduce((acc, dice) => acc + (dice.currentFace?.value ?? 0), 0);
-
-const findNOfAKind = (n: number, dices: DiceModel[]) => {
-  const dicesPerFaceValue = dices.reduce<Record<number, number>>(
-    (acc, dice) => {
-      if (dice.currentFace)
-        return {
-          ...acc,
-          [dice.currentFace.value]: acc[dice.currentFace.value] ?? 0 + 1,
-        };
-      return acc;
-    },
-    {}
-  );
-
-  const value = Object.entries(dicesPerFaceValue).find(
-    ([, value]) => value >= n
-  )?.[0];
-
-  return Number(value ?? 0);
-};
 
 export const scoreboardDefinitions: Record<
   ScoreTypeEnum,
@@ -75,19 +57,39 @@ export const scoreboardDefinitions: Record<
   },
   full: {
     name: 'Full',
-    computeValue: () => 25,
+    computeValue: (dices) => {
+      const threeOfAKind = findNOfAKind(3, dices);
+      const otherDices = dices.filter(
+        (dice) => dice.currentFace?.value !== threeOfAKind
+      );
+
+      const [dice1, dice2] = otherDices;
+
+      if (
+        otherDices.length === 2 &&
+        dice1.currentFace?.value === dice2.currentFace?.value
+      ) {
+        return 25;
+      }
+
+      return 0;
+    },
   },
   small_straight: {
     name: 'Small straight',
-    computeValue: () => 30,
+    computeValue: (dices) => {
+      return findNStraight(4, dices) ? 30 : 0;
+    },
   },
   straight: {
     name: 'Straight',
-    computeValue: () => 40,
+    computeValue: (dices) => {
+      return findNStraight(5, dices) ? 40 : 0;
+    },
   },
   five_of_a_kind: {
     name: 'Yams',
-    computeValue: () => 50,
+    computeValue: (dices) => (findNOfAKind(5, dices) ? 50 : 0),
   },
   lucky: {
     name: '☘',
