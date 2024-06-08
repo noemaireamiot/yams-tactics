@@ -10,7 +10,7 @@ export function LeaderBoard({ className = '' }: LeaderBoardProps) {
   const { game } = useGameContext();
   return (
     <div className={`${className}`}>
-      <div className={`border-radius ${'metadataWrapper'}`}>
+      <div className={`border-radius ${'leaderboardWrapper'}`}>
         {game?.players.map((player) => (
           <PlayerBoard key={player.id} player={player} />
         ))}

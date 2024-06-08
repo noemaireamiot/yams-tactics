@@ -1,3 +1,4 @@
+import { cls } from '@yams-tactics/frontend-common';
 import './dice.scss';
 
 interface diceInterface {
@@ -11,14 +12,21 @@ export function Dice({ value, onClick, selected, rotating }: diceInterface) {
   return (
     <div
       onClick={onClick}
-      className={`${'cube'} ${
-        value && !rotating ? `rotating_${value}` : 'rotating'
-      } ${selected ? 'selected' : ''} ${value ? `value_${value}` : ''} ${
+      className={cls(
+        'h-[100px]',
+        'w-[100px]',
+        'cube',
+        value && !rotating ? `rotating_${value}` : 'rotating',
+        selected ? 'selected' : '',
+        value ? `value_${value}` : '',
         rotating ? 'rotating' : ''
-      }`}
+      )}
     >
       <div className={`${'box'} ${'box1'}`}>
-        <img src="../../../assets/dice_1.svg" />
+        <img
+          className={cls('w-full', 'h-full')}
+          src="../../../assets/dice_1.svg"
+        />
       </div>
       <div className={`${'box'} ${'box2'}`}>
         <img src="../../../assets/dice_2.svg" />

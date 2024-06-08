@@ -1,7 +1,4 @@
 .cube {
-  width: 100px;
-  height: 100px;
-  position: relative;
   transform-style: preserve-3d;
 }
 
@@ -52,7 +49,7 @@
   transform: rotateY(90deg) rotateZ(90deg);
 }
 
-.cube > img {
+.cube img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -171,6 +168,6 @@
 .box:hover {
   outline: 3px solid salmon;
 }
-.cube.box.selected {
-outline: 3px solid red;
+.selected {
+  outline: 3px solid red;
 }
