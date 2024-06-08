@@ -41,7 +41,6 @@ export function DiceZone() {
 
     setAnimation(true);
     await dispatchRollDices({ dices: diceToBeRolled, round });
-    setLockedDices([]);
     setAnimation(false);
   };
 

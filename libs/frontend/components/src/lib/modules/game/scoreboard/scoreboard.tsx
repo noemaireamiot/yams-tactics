@@ -35,13 +35,9 @@ export function ScoreBoard({ className = '' }: ScoreBoardProps) {
 
   if (!game) return null;
 
-  const onSubmitScore = async (score?: ScoreModel) => {
-    // to remove
-    const s = currentPlayer?.scoreboard.scores.find((score) => !score.done);
+  const onSubmitScore = async (score: ScoreModel) => {
     const dices = currentPlayer?.dices ?? [];
-    if (s) {
-      await dispatchSubmitScore({ dices, round: game?.currentRound, score: s });
-    }
+    await dispatchSubmitScore({ dices, round: game?.currentRound, score });
   };
 
   return (

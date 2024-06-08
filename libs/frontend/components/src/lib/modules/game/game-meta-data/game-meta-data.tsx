@@ -17,7 +17,7 @@ export function GameMetaData({ className, currentPlayer }: GameMetaDataProps) {
         <div className={`${'name'} w-full`}>
           <Tag
             className={`flex justify-center w-full box-border`}
-            label={currentPlayer?.user.name || 'Loading'}
+            label={currentPlayer?.user?.name || 'Loading'}
             size="L"
           />
         </div>

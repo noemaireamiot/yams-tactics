@@ -12,9 +12,7 @@ export function UserCard({
     <div className="userCardContainer">
       <img className="avatar" src={user.avatar ?? ''} alt={user.name} />
       {typeof score === 'number' && (
-        <span className="score font-M">
-          {/* TODO calcutate score (or store it) */}43
-        </span>
+        <span className="score font-M">{score}</span>
       )}
       <div
         style={{
