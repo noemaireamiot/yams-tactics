@@ -1,4 +1,4 @@
-import { PlayerModel, Round } from '../../../../model';
+import { DiceModel, PlayerModel, Round } from '../../../../model';
 import { ActionTypeEnum } from '../../../../enum';
 import { computeDicesRoll } from '../../dice';
 import { actionDefinition } from '../action.definition';
@@ -11,7 +11,7 @@ export async function onRollDices(
     round,
   }: {
     player: PlayerModel;
-    dices: number[];
+    dices: DiceModel[];
     round: Round;
   },
   onUpdatePlayer: (player: PlayerModel) => Promise<void> | void
@@ -20,18 +20,18 @@ export async function onRollDices(
     return;
   }
 
-  const updatedPlayer = {
+  const updatedPlayer: PlayerModel = {
     ...player,
-    actions: [...player.actions, actionDefinition.roll_dices(dices, round)],
+    actions: [...player.actions, actionDefinition.roll_dices({ dices, round })],
   };
 
-  const faces = computeDicesRoll(player);
+  const rolledDices = computeDicesRoll(player);
 
   updatedPlayer.dices = player.dices.map((dice, i) => {
-    return {
-      ...dice,
-      currentFace: dices.includes(i) ? faces[i] : dice.currentFace,
-    };
+    if (!dices.map((dice) => dice.id).includes(dice.id)) {
+      return dice;
+    }
+    return rolledDices[i];
   });
 
   await onUpdatePlayer(updatedPlayer);

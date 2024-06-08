@@ -31,7 +31,7 @@ export function gameLoop(
               await onRollDices(
                 {
                   player,
-                  dices: player.dices.map((_, i) => i),
+                  dices: player.dices,
                   round: currentRound,
                 },
                 async (player) => {

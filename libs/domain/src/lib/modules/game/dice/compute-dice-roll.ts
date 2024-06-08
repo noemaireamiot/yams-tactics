@@ -1,4 +1,4 @@
-import { DiceModel, FaceModel, PlayerModel } from '../../../model';
+import { DiceModel, PlayerModel } from '../../../model';
 import { getRandomNBetween } from '../../../random';
 
 export const computeDiceRoll = (player: PlayerModel, dice: DiceModel) => {
@@ -10,10 +10,11 @@ export const computeDiceRoll = (player: PlayerModel, dice: DiceModel) => {
   return dice.faces[randomFace];
 };
 
-export const computeDicesRoll = (player: PlayerModel): FaceModel[] => {
-  const faces = player.dices.map((dice) => {
-    return computeDiceRoll(player, dice);
+export const computeDicesRoll = (player: PlayerModel): DiceModel[] => {
+  return player.dices.map<DiceModel>((dice) => {
+    return {
+      ...dice,
+      currentFace: computeDiceRoll(player, dice),
+    };
   });
-
-  return faces;
 };

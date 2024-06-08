@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './dice-zone.scss';
 import { Dice } from './components';
-import { canRollDiceThisRound } from '@yams-tactics/domain';
+import { DiceModel, canRollDiceThisRound } from '@yams-tactics/domain';
 import { useGameContext } from '@yams-tactics/frontend-common';
 import { Button } from '@yams-tactics/frontend-components';
 
@@ -15,12 +15,12 @@ export function DiceZone() {
   const round = game?.currentRound ?? 'dice.1';
   const [animation, setAnimation] = useState(false);
 
-  const [lockedDices, setLockedDices] = useState<number[]>([]);
-  const onDiceClick = (index: number) => {
+  const [lockedDices, setLockedDices] = useState<string[]>([]);
+  const onDiceClick = (dice: DiceModel) => {
     setLockedDices((lockedDices) =>
-      lockedDices.includes(index)
-        ? lockedDices.filter((d) => d === index)
-        : [...lockedDices, index]
+      lockedDices.includes(dice.id)
+        ? lockedDices.filter((d) => d === dice.id)
+        : [...lockedDices, dice.id]
     );
   };
   const canRoleDice =
@@ -31,16 +31,16 @@ export function DiceZone() {
   }
 
   const onRollClick = async () => {
-    const diceToBeRolled = (currentPlayer?.dices ?? []).reduce<number[]>(
-      (acc, _, i) => {
-        return lockedDices.includes(i) ? acc : [...acc, i];
+    const diceToBeRolled = (currentPlayer?.dices ?? []).reduce<DiceModel[]>(
+      (acc, dice) => {
+        return lockedDices.includes(dice.id) ? acc : [...acc, dice];
       },
       []
     );
     // @TODO - Add a context for those dice animation to be able to display loading state on precompute
 
     setAnimation(true);
-    await dispatchRollDices(diceToBeRolled, round);
+    await dispatchRollDices({ dices: diceToBeRolled, round });
     setTimeout(() => {
       setAnimation(false);
       setLockedDices([]);
@@ -58,13 +58,13 @@ export function DiceZone() {
       </Button>
       <div className={'play'}>
         <div className={'dices'}>
-          {(currentPlayer?.dices ?? []).map((dice, index) => (
+          {(currentPlayer?.dices ?? []).map((dice) => (
             <Dice
               key={dice.id}
               value={dice.currentFace?.value}
-              selected={lockedDices.includes(index)}
-              onClick={() => onDiceClick(index)}
-              rotating={!lockedDices.includes(index) && animation}
+              selected={lockedDices.includes(dice.id)}
+              onClick={() => onDiceClick(dice)}
+              rotating={!lockedDices.includes(dice.id) && animation}
             />
           ))}
         </div>

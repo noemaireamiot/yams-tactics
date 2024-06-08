@@ -6,11 +6,17 @@ import {
 } from 'react';
 import { gameReducer } from './game.reducer';
 import { GameContextState } from './types';
-import { useGameLoop, useReconciliate, useRollDices } from '../hooks';
+import {
+  useGameLoop,
+  useReconciliate,
+  useRollDices,
+  useSubmitScore,
+} from '../hooks';
 
 const GameContext = createContext<GameContextState>({
   isLoading: true,
   onRollDices: async () => {},
+  onSubmitScore: async () => {},
 });
 
 export const GameContextProvider = ({
@@ -20,15 +26,17 @@ export const GameContextProvider = ({
   const [state, dispatch] = useReducer(gameReducer, {
     isLoading: true,
     onRollDices: async () => {},
+    onSubmitScore: async () => {},
   });
 
   useReconciliate(gameId, dispatch);
   useGameLoop(state, dispatch);
 
   const onRollDices = useRollDices(state, dispatch);
+  const onSubmitScore = useSubmitScore(state, dispatch);
 
   return (
-    <GameContext.Provider value={{ ...state, onRollDices }}>
+    <GameContext.Provider value={{ ...state, onRollDices, onSubmitScore }}>
       {children}
     </GameContext.Provider>
   );

@@ -2,15 +2,16 @@ import {
   ActionTypeEnum,
   DiceModel,
   Round,
+  ScoreModel,
   actionDefinition,
-  onRollDices,
+  onSubmitScore,
 } from '@yams-tactics/domain';
 import { Dispatch, useCallback } from 'react';
 import { usePlayerActions } from '../../../query';
 import { GameContextAction, GameContextState } from '../contexts/types';
 import { useGetCurrentPlayer } from './use-get-current-player';
 
-export function useRollDices(
+export function useSubmitScore(
   state: GameContextState,
   dispatch: Dispatch<GameContextAction>
 ) {
@@ -18,11 +19,19 @@ export function useRollDices(
   const getCurrentPlayer = useGetCurrentPlayer();
 
   return useCallback(
-    async ({ dices, round }: { dices: DiceModel[]; round: Round }) => {
-      const action = actionDefinition.roll_dices({ dices, round });
+    async ({
+      dices,
+      round,
+      score,
+    }: {
+      dices: DiceModel[];
+      round: Round;
+      score: ScoreModel;
+    }) => {
+      const action = actionDefinition.submit_score({ dices, round, score });
       await playerActions(action);
 
-      onRollDices(
+      onSubmitScore(
         { player: getCurrentPlayer(state.game?.players), dices, round },
         (player) => {
           dispatch({ type: ActionTypeEnum.roll_dices, currentPlayer: player });

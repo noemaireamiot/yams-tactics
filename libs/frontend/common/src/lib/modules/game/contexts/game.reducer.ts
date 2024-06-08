@@ -1,4 +1,4 @@
-import { ActionTypeEnum } from '@yams-tactics/domain';
+import { ActionTypeEnum, PlayerModel } from '@yams-tactics/domain';
 import { GameContextAction, GameContextState } from './types';
 
 export function gameReducer(
@@ -40,14 +40,50 @@ export function gameReducer(
         ? state
         : {
             ...state,
-            game: {
-              ...state.game,
-              players: state.game.players.map((p) =>
-                p.id === action.currentPlayer.id ? action.currentPlayer : p
-              ),
-            },
+            // might not need that
+            // game: {
+            //   ...state.game,
+            //   players: state.game.players.map((p) =>
+            //     p.id === action.currentPlayer.id ? action.currentPlayer : p
+            //   ),
+            // },
             currentPlayer: action.currentPlayer,
           };
+    }
+
+    case ActionTypeEnum.submit_score: {
+      if (state.isLoading) {
+        return state;
+      }
+
+      const currentPlayer = {
+        ...action.currentPlayer,
+        scoreboard: {
+          ...action.currentPlayer.scoreboard,
+          scores: [
+            ...action.currentPlayer.scoreboard.scores.map((score) => {
+              return score.id === action.score.id
+                ? {
+                    ...score,
+                    done: true,
+                    value: score.value,
+                  }
+                : score;
+            }),
+          ],
+        },
+      } as PlayerModel;
+
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          players: state.game.players.map((p) =>
+            p.id === currentPlayer.id ? currentPlayer : p
+          ),
+        },
+        currentPlayer,
+      };
     }
 
     default:
