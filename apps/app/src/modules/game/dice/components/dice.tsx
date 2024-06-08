@@ -1,14 +1,15 @@
 import { cls } from '@yams-tactics/frontend-common';
 import './dice.scss';
+import { DiceModel } from '@yams-tactics/domain';
 
 interface diceInterface {
-  value?: number;
+  dice?: DiceModel;
   onClick?: () => void;
   selected?: boolean;
   rotating?: boolean;
 }
 
-export function Dice({ value, onClick, selected, rotating }: diceInterface) {
+export function Dice({ dice, onClick, selected, rotating }: diceInterface) {
   return (
     <div
       onClick={onClick}
@@ -16,33 +17,22 @@ export function Dice({ value, onClick, selected, rotating }: diceInterface) {
         'h-[100px]',
         'w-[100px]',
         'cube',
-        value && !rotating ? `rotating_${value}` : 'rotating',
-        selected ? 'selected' : '',
-        value ? `value_${value}` : '',
+        dice?.currentFace?.value && !rotating
+          ? `rotating_${dice.currentFace?.value}`
+          : 'rotating',
+
+        dice?.currentFace?.value ? `value_${dice.currentFace?.value}` : '',
         rotating ? 'rotating' : ''
       )}
     >
-      <div className={`${'box'} ${'box1'}`}>
-        <img
-          className={cls('w-full', 'h-full')}
-          src="../../../assets/dice_1.svg"
-        />
-      </div>
-      <div className={`${'box'} ${'box2'}`}>
-        <img src="../../../assets/dice_2.svg" />
-      </div>
-      <div className={`${'box'} ${'box3'}`}>
-        <img src="../../../assets/dice_3.svg" />
-      </div>
-      <div className={`${'box'} ${'box4'}`}>
-        <img src="../../../assets/dice_4.svg" />
-      </div>
-      <div className={`${'box'} ${'box5'}`}>
-        <img src="../../../assets/dice_5.svg" />
-      </div>
-      <div className={`${'box'} ${'box6'}`}>
-        <img src="../../../assets/dice_6.svg" />
-      </div>
+      {[1, 2, 3, 4, 5, 6].map((_, index) => (
+        <div className={cls('box', `box${index + 1}`, selected && 'selected')}>
+          <img
+            className={cls('w-full', 'h-full')}
+            src={`../../../assets/dice_${index + 1}.svg`}
+          />
+        </div>
+      ))}
     </div>
   );
 }

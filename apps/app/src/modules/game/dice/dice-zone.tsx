@@ -83,7 +83,7 @@ export function DiceZone() {
           {(currentPlayer?.dices ?? []).map((dice) => (
             <Dice
               key={dice.id}
-              value={dice.currentFace?.value}
+              dice={dice}
               selected={lockedDices.includes(dice.id)}
               onClick={() => onDiceClick(dice)}
               rotating={!lockedDices.includes(dice.id) && animation}
