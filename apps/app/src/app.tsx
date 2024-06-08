@@ -12,7 +12,7 @@ import { initReactI18next } from 'react-i18next';
 import translationEN from './locales/en/translation.json';
 import { GameArea } from './modules/game/game-area';
 
-const environment = { baseAPI: 'http://localhost:3000/api' };
+const environment = { baseAPI: 'http://192.168.1.14:3000/api' };
 
 const userAuthService = new UserAuthService(environment.baseAPI);
 const AuthProvider = createUserAuthProvider({ authService: userAuthService });

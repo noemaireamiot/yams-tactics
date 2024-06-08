@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import './dice-zone.scss';
 import { Dice } from './components';
-import {
-  DiceModel,
-  ScoreModel,
-  canRollDiceThisRound,
-  canSubmitScoreThisRound,
-} from '@yams-tactics/domain';
+import { DiceModel, canRollDiceThisRound } from '@yams-tactics/domain';
 import { useGameContext } from '@yams-tactics/frontend-common';
 import { Button } from '@yams-tactics/frontend-components';
 
@@ -16,7 +11,6 @@ export function DiceZone() {
     game,
     currentPlayer,
     onRollDices: dispatchRollDices,
-    onSubmitScore: dispatchSubmitScore,
   } = useGameContext();
   const round = game?.currentRound ?? 'dice.1';
   const [animation, setAnimation] = useState(false);
@@ -25,14 +19,12 @@ export function DiceZone() {
   const onDiceClick = (dice: DiceModel) => {
     setLockedDices((lockedDices) =>
       lockedDices.includes(dice.id)
-        ? lockedDices.filter((d) => d === dice.id)
+        ? lockedDices.filter((d) => d !== dice.id)
         : [...lockedDices, dice.id]
     );
   };
   const canRoleDice =
     currentPlayer && canRollDiceThisRound(currentPlayer, round);
-  const canSubmitScore =
-    currentPlayer && canSubmitScoreThisRound(currentPlayer, round);
 
   if (isLoading) {
     return null;
@@ -53,15 +45,6 @@ export function DiceZone() {
     setAnimation(false);
   };
 
-  const onSubmitScore = async (score?: ScoreModel) => {
-    // to remove
-    const s = currentPlayer.scoreboard.scores.find((score) => !score.done);
-    const dices = currentPlayer?.dices ?? [];
-    if (s) {
-      await dispatchSubmitScore({ dices, round, score: s });
-    }
-  };
-
   return (
     <div className="w-full h-full">
       <Button
@@ -72,12 +55,6 @@ export function DiceZone() {
         Launch dice
       </Button>
 
-      <Button
-        onClick={() => onSubmitScore()}
-        disabled={animation || !canSubmitScore}
-      >
-        Submit score
-      </Button>
       <div className={'play'}>
         <div className={'dices'}>
           {(currentPlayer?.dices ?? []).map((dice) => (

@@ -35,7 +35,7 @@ export class CookieHelperService {
       httpOnly: true,
       secure: false,
       path: '/',
-      sameSite: 'strict',
+      sameSite: 'none',
     };
   }
 }
