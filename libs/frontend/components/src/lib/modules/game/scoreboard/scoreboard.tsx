@@ -21,14 +21,12 @@ export function ScoreBoard({ className = '' }: ScoreBoardProps) {
   });
 
   return (
-    <div className={`bg-indigo-500 ${className} ${'scoreboard'} shadow`}>
+    <div className={`${className} ${'scoreboard'} shadow`}>
       <table>
         <tbody>
           {(scores ?? []).map((score) => (
             <tr key={score.id}>
-              <td className="rawName">
-                {t(`scoreboard.${score.type}`)}
-              </td>
+              <td className="rawName">{t(`scoreboard.${score.type}`)}</td>
               <td className="possible">
                 {game?.currentRound.startsWith('shop')
                   ? score.done
