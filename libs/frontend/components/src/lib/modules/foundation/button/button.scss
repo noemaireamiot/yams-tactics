@@ -1,21 +1,20 @@
-.btn {
-  --bg: #f3eed9; /* the background color */
-  &__yellow {
-    --c: #ddab40; /* the color */
-  }
+.btn__yellow {
+  --c: #ddab40; /* the color */
+}
 
-  &__red {
-    --c: #c1554d; /* the color */
-  }
+.btn__red {
+  --c: #c1554d; /* the color */
+}
 
-  &__blue {
-    --c: #009683; /* the color */
-  }
+.btn__blue {
+  --c: #009683; /* the color */
+}
 
-  &__brown {
-    --c: #624100; /* the color */
-  }
+.btn__brown {
+  --c: #624100; /* the color */
+}
 
+button.btn {
   --b: 0.2em; /* border length*/
   --d: 10px; /* the cube depth */
 
@@ -24,7 +23,7 @@
   margin-top: 10px;
   color: var(--c);
   font-family: 'Alata', sans-serif;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   cursor: pointer;
   border: solid #0000;
   border-width: var(--b) var(--b) var(--_s) var(--_s);
@@ -48,38 +47,38 @@
   );
   transition: 0.3s;
 
+  background-color: #f3eed9;
   padding: 5px 15px;
-  background-color: var(--bg);
   font-weight: bold;
+}
 
-  &:hover {
-    transform: translate(0, 0);
-    clip-path: polygon(
-      0% var(--d),
-      var(--d) 0%,
-      100% 0%,
-      100% calc(100% - var(--d)),
-      calc(100% - var(--d)) 100%,
-      0% 100%
-    );
-  }
+.btn:active {
+  transition: 0s;
 
-  &:active {
-    transition: 0s;
+  transform: translate(calc(var(--d) / -1), var(--d));
+  clip-path: polygon(
+    var(--d) 0%,
+    var(--d) 0%,
+    100% 0%,
+    100% calc(100% - var(--d)),
+    100% calc(100% - var(--d)),
+    var(--d) calc(100% - var(--d))
+  );
+}
 
-    transform: translate(calc(var(--d) / -1), var(--d));
-    clip-path: polygon(
-      var(--d) 0%,
-      var(--d) 0%,
-      100% 0%,
-      100% calc(100% - var(--d)),
-      100% calc(100% - var(--d)),
-      var(--d) calc(100% - var(--d))
-    );
-  }
+.btn:disabled {
+  pointer-events: none;
+  --c: gray;
+}
 
-  &:disabled {
-    pointer-events: none;
-    --c: gray;
-  }
+.btn:hover {
+  transform: translate(0, 0);
+  clip-path: polygon(
+    0% var(--d),
+    var(--d) 0%,
+    100% 0%,
+    100% calc(100% - var(--d)),
+    calc(100% - var(--d)) 100%,
+    0% 100%
+  );
 }

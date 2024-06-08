@@ -12,7 +12,35 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        sm: '480px',
+        md: '768px',
+        lg: '976px',
+        xl: '1440px',
+      },
+      colors: {
+        brand: {
+          yellow: '#ddab40',
+          red: '#c1554d',
+          blue: '#009683',
+          brown: '#624100',
+        },
+        'input-bg': '#f3eed9',
+      },
+      fontFamily: {
+        sans: ['Alata', 'sans-serif'],
+      },
+      extend: {
+        spacing: {
+          128: '32rem',
+          144: '36rem',
+        },
+        borderRadius: {
+          '4xl': '2rem',
+        },
+      },
+    },
   },
   plugins: [],
 };

@@ -1,3 +1,4 @@
+import { cls } from '@yams-tactics/frontend-common';
 import './button.scss';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -15,7 +16,7 @@ export function Button({
       {...props}
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
-      className={`${props.className} btn ${`btn__${color}`}}`}
+      className={cls(props.className, 'btn', `btn__${color}`, 'bg-input-bg')}
     >
       {props.children}
     </button>
