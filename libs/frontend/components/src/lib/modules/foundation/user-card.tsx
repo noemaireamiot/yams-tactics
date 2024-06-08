@@ -1,5 +1,5 @@
 import { UserModel } from '@yams-tactics/domain';
-import styles from './user-card.scss';
+import './user-card.scss';
 
 export function UserCard({
   user,
@@ -9,14 +9,10 @@ export function UserCard({
   score?: number | null;
 }) {
   return (
-    <div className={`${styles.userCardContainer}`}>
-      <img
-        className={`${styles.avatar}`}
-        src={user.avatar ?? ''}
-        alt={user.name}
-      />
+    <div className="userCardContainer">
+      <img className="avatar" src={user.avatar ?? ''} alt={user.name} />
       {typeof score === 'number' && (
-        <span className={`${styles.score} font-M`}>
+        <span className="score font-M">
           {/* TODO calcutate score (or store it) */}43
         </span>
       )}

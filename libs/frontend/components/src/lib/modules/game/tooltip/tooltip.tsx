@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './tooltip.scss';
+import './tooltip.scss';
 import {
   autoPlacement,
   offset,
@@ -29,7 +29,7 @@ export function Tooltip({ content, children }: TooltipProps) {
         <div
           ref={refs.setFloating}
           style={floatingStyles}
-          className={styles.tooltip}
+          className={'tooltip'}
         >
           {content}
         </div>

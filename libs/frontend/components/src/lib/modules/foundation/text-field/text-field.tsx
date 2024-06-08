@@ -1,4 +1,4 @@
-import styles from './text-field.scss';
+import './text-field.scss';
 
 interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -6,11 +6,9 @@ interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 export function TextField(props: TextFieldProps) {
   return (
-    <label className={styles.textField}>
-      {props.label && (
-        <span className={styles.textField__label}>{props.label}</span>
-      )}
-      <input className={styles.textField__field} {...props} />
+    <label className={'textField'}>
+      {props.label && <span className={'textField__label'}>{props.label}</span>}
+      <input className={'textField__field'} {...props} />
     </label>
   );
 }

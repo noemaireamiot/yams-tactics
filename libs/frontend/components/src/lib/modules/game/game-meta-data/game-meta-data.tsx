@@ -1,5 +1,5 @@
 import { Tag } from '../tag';
-import styles from './game-meta-data.scss';
+import './game-meta-data.scss';
 import { PlayerModel } from '@yams-tactics/domain';
 import { useGameContext } from '@yams-tactics/frontend-common';
 
@@ -13,18 +13,18 @@ export function GameMetaData({ className, currentPlayer }: GameMetaDataProps) {
 
   return (
     <div className={`${className || ''}`}>
-      <div className={`border-radius ${styles.metadataWrapper}`}>
-        <div className={`${styles.name} w-full`}>
+      <div className={`border-radius ${'metadataWrapper'}`}>
+        <div className={`${'name'} w-full`}>
           <Tag
             className={`flex justify-center w-full box-border`}
             label={currentPlayer?.user.name || 'Loading'}
             size="L"
           />
         </div>
-        <div className={`${styles.round}`}>
+        <div className={`${'round'}`}>
           {game && <Tag label={`${game.currentRound}/13`} size="L" />}
         </div>
-        <div className={`${styles.gold}`}>
+        <div className={`${'gold'}`}>
           <Tag label={`${currentPlayer?.gold}$`} size="L" />
         </div>
       </div>

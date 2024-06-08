@@ -1,4 +1,4 @@
-import styles from './button.scss';
+import './button.scss';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: 'yellow' | 'red' | 'blue' | 'brown';
@@ -15,7 +15,7 @@ export function Button({
       {...props}
       disabled={disabled}
       onClick={disabled ? undefined : onClick}
-      className={`${props.className} ${styles.btn} ${styles[`btn__${color}`]}`}
+      className={`${props.className} btn ${`btn__${color}`}}`}
     >
       {props.children}
     </button>

@@ -2,7 +2,6 @@
 @import './variables';
 
 :global #root {
-  // The screen is full-height with removed padding to avoid scroll bars
   height: calc(100vh - 20px);
   padding: 10px;
 }
@@ -14,8 +13,9 @@ html {
 
   background-image: url('./assets/greenCarpet.jpg');
   height: 100vh;
-  body {
-    height: 100%;
-    margin: 0;
-  }
+}
+
+body {
+  height: 100%;
+  margin: 0;
 }
