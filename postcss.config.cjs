@@ -1,6 +1,2 @@
-console.info('TMP');
-module.exports = {
-  plugins: {
-    tailwindcss: {},
-  },
-};
+// Really important !!
+module.exports = {};

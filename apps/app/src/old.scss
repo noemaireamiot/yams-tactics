@@ -1,7 +1,7 @@
 @import './common';
 @import './variables';
 
-:global #root {
+#root {
   height: calc(100vh - 20px);
   padding: 10px;
 }

@@ -19,7 +19,7 @@ export function GameLayout({
   currentPlayer,
 }: PropsWithChildren<GameLayoutProps>) {
   return (
-    <div className={`container h-full`}>
+    <div className={`gameContainer h-full`}>
       <GameMetaData className="metadata" currentPlayer={currentPlayer} />
       <Timer className="timer" />
       <ScoreBoard className="scoreboard" />

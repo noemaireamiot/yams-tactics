@@ -14,7 +14,7 @@ export function Login() {
     await passwordLogin(name);
   };
   return (
-    <div className="container">
+    <div className="containerAuth">
       <form onSubmit={onSubmit}>
         <TextField autoFocus name="name" label="Name" />
         <Button color="yellow" type="submit" className="btn-w-full">

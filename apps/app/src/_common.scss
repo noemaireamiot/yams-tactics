@@ -1,90 +1,69 @@
 $SPACE_UNIT: 4;
 
-// This feel awful 🤡
-
-:global .h-full {
+.h-full {
   height: 100%;
 }
-
-:global .w-full {
+.w-full {
   width: 100%;
 }
-
-:global .btn-w-full {
+.btn-w-full {
   width: calc(var(--d) + 100%);
 }
-
-:global .flex {
+.flex {
   display: flex;
 }
-
-:global .column {
+.column {
   flex-direction: column;
 }
-
-:global .column {
+.column {
   flex-direction: column;
 }
-
-:global .justify-right {
+.justify-right {
   justify-content: right;
 }
-
-:global .justify-center {
+.justify-center {
   justify-content: center;
 }
-
-:global .box-border {
+.box-border {
   box-sizing: border-box;
 }
-
-:global .border-radius {
+.border-radius {
   border-radius: 10px;
 }
-
-:global .font-S {
+.font-S {
   font-size: 1em;
 }
-
-:global .font-M {
+.font-M {
   font-size: 2em;
 }
-
-:global .font-L {
+.font-L {
   font-size: 3em;
 }
-
-:global .font-XL {
+.font-XL {
   font-size: 4em;
 }
-
-:global .ellipsis {
+.ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   padding: 0 calc(2 * $SPACE_UNIT * 1px);
 }
-
-:global .shadow {
+.shadow {
   box-shadow: rgba(0, 0, 0, 0.5) 0px 10px 20px, rgba(0, 0, 0, 0.5) 0px 6px 6px;
 }
 
 @mixin h($height) {
   height: calc($height * $SPACE_UNIT * 1px);
 }
-
-:global .h-1 {
+.h-1 {
   @include h(1);
 }
-
-:global .h-2 {
+.h-2 {
   @include h(2);
 }
-
-:global .h-4 {
+.h-4 {
   @include h(4);
 }
-
-:global .h-8 {
+.h-8 {
   @include h(8);
 }
