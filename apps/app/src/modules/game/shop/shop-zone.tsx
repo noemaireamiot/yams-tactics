@@ -1,5 +1,6 @@
 import { cls } from '@yams-tactics/frontend-common';
 import { Roll, ShopContainer } from './components';
+import { select } from 'ts-pattern/dist/patterns';
 
 export function ShopZone() {
   return (
@@ -15,6 +16,7 @@ export function ShopZone() {
       >
         <div
           className={cls(
+            'select-none',
             'text-[80px]',
             'uppercase',
             'w-[300px]',
@@ -26,25 +28,26 @@ export function ShopZone() {
         <div className={cls('h-full', 'grid grid-cols-1 gap-4 auto-rows-fr')}>
           <ShopContainer type="face" title="Face"></ShopContainer>
           <ShopContainer type="token" title="Token"></ShopContainer>
-          <div className={cls('grid grid-cols-3 gap-4')}>
+          <div className={cls('grid grid-cols-[300px,1fr] gap-4')}>
             <div
               className={cls(
-                `bg-[#DEB887BB]`,
+                'w-[300px]',
+                'bg-[#DEB887BB]',
                 'p-4',
                 'rounded-xl',
                 'cursor-pointer'
               )}
             >
-              <div className={cls(' h-full flex justify-around items-center')}>
+              <div
+                className={cls('h-full', 'flex justify-around items-center')}
+              >
                 <Roll />
-                <div className={cls('text-[63px] text-white')}>5$</div>
+                <div className={cls('select-none', 'text-[63px] text-white')}>
+                  5$
+                </div>
               </div>
             </div>
-            <ShopContainer
-              className="col-span-2"
-              type="passive"
-              title="Passive"
-            ></ShopContainer>
+            <ShopContainer type="passive" title="Passive"></ShopContainer>
           </div>
         </div>
       </div>

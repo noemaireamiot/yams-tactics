@@ -26,7 +26,6 @@ export function ShopContainer({
         'pr-4',
         'rounded-xl',
         'flex',
-        'cursor-pointer',
         className
       )}
     >
@@ -44,6 +43,7 @@ export function ShopContainer({
         <div
           className={cls(
             'text-[#2E2E2E]',
+            'select-none',
             'uppercase',
             // nice
             'text-[60px]'
