@@ -35,7 +35,9 @@ export class CookieHelperService {
       httpOnly: true,
       secure: false,
       path: '/',
-      sameSite: 'none',
+      // strict for now in localhost
+      // need none if you want to play on local server
+      sameSite: 'strict',
     };
   }
 }

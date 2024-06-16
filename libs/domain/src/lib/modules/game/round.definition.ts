@@ -15,7 +15,7 @@ export function getRoundDefinition(round?: Round) {
 export function roundsFactory() {
   return new Array(ROUND_COUNT).fill(0).reduce<Round[]>((acc, e, i) => {
     const round = i + 1;
-    return [...acc, `shop.${round}`, `shop.${round}`];
+    return [...acc, `shop.${round}`, `dice.${round}`];
   }, []);
 }
 

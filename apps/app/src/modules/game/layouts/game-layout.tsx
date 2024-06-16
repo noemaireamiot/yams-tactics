@@ -25,7 +25,7 @@ export function GameLayout({
       <ScoreBoard className="scoreboard" />
       <LeaderBoard className="leaderboard" />
       <div className="content">{children}</div>
-      <Stuff className="stuff" />
+      <Stuff />
     </div>
   );
 }

@@ -1,13 +1,6 @@
+import { cls } from '@yams-tactics/frontend-common';
 import './stuff.scss';
 
-interface StuffProps {
-  className?: string;
-}
-
-export function Stuff({ className }: StuffProps) {
-  return (
-    <div style={{ backgroundColor: 'green' }} className={`${className || ''}`}>
-      stuff
-    </div>
-  );
+export function Stuff() {
+  return <div className={cls('bg-white/[.5]')}>stuff</div>;
 }
