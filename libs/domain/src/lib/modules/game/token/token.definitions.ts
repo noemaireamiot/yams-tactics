@@ -16,6 +16,14 @@ export const tokenDefinitions = {
       return player;
     },
   },
+  [TokenTypeEnum.hermit]: {
+    name: 'Hermit',
+    description: 'Double la thune',
+    effect: ({ player }) => {
+      player.gold = player.gold * 2;
+      return { ...player, gold: player.gold * 2 };
+    },
+  },
 } as const satisfies Record<
   TokenTypeEnum,
   {
@@ -24,7 +32,7 @@ export const tokenDefinitions = {
     effect: (params: {
       player: PlayerModel;
       round: Round;
-      dice: DiceModel;
+      dice?: DiceModel;
     }) => PlayerModel;
   }
 >;

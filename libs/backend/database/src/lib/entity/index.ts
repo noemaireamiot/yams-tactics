@@ -6,6 +6,7 @@ import { Player } from './player.entity';
 import { Face } from './face.entity';
 import { Scoreboard } from './scoreboard.entity';
 import { RefreshToken } from './refresh-token.entity';
+import { Token } from './token.entity';
 
 export const entities = [
   Room,
@@ -16,7 +17,18 @@ export const entities = [
   Player,
   RefreshToken,
   Scoreboard,
+  Token,
 ];
 export type Entity = InstanceType<(typeof entities)[number]>;
 
-export { Room, Dice, Face, User, Game, Player, RefreshToken, Scoreboard };
+export {
+  Room,
+  Dice,
+  Face,
+  User,
+  Game,
+  Player,
+  RefreshToken,
+  Scoreboard,
+  Token,
+};

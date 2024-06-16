@@ -7,8 +7,9 @@ import {
   Repository,
   Room,
   Scoreboard,
+  Token,
 } from '@yams-tactics/backend-database';
-import { PLAYER_PER_ROOM, gameLoop } from '@yams-tactics/domain';
+import { PLAYER_PER_ROOM, TokenTypeEnum, gameLoop } from '@yams-tactics/domain';
 import { v4 } from 'uuid';
 
 @Injectable()
@@ -44,6 +45,7 @@ export class GameService {
                 user,
                 dices,
                 scoreboard,
+                tokens: [new Token({ type: TokenTypeEnum.minus_one })],
               })
             );
           }),
