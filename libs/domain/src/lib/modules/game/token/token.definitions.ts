@@ -13,6 +13,7 @@ export const tokenDefinitions = {
     name: '+1',
     description: 'Substract one to a dice',
     effect: ({ player, round, dice }) => {
+      void round, dice;
       return player;
     },
   },

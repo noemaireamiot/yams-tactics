@@ -1,6 +1,5 @@
 import { cls } from '@yams-tactics/frontend-common';
 import { Roll, ShopContainer } from './components';
-import { select } from 'ts-pattern/dist/patterns';
 
 export function ShopZone() {
   return (
