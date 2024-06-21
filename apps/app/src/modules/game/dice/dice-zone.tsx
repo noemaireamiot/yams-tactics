@@ -87,7 +87,7 @@ export function DiceZone() {
               droppableId={DiceZoneEnum.playing}
               direction="horizontal"
             >
-              {(droppableProvided, snapshot) => {
+              {(droppableProvided) => {
                 return (
                   <div
                     ref={droppableProvided.innerRef}
@@ -109,7 +109,7 @@ export function DiceZone() {
                           key={String(dice.id)}
                           index={dicesOrder.indexOf(dice.id)}
                         >
-                          {(provided, snapshot) => {
+                          {(provided) => {
                             return (
                               <div
                                 ref={provided.innerRef}
@@ -177,7 +177,7 @@ export function DiceZone() {
                           key={String(dice.id)}
                           index={lockedDices.indexOf(dice.id)}
                         >
-                          {(provided, snapshot) => {
+                          {(provided) => {
                             return (
                               <div
                                 ref={provided.innerRef}
