@@ -1,5 +1,6 @@
 export * from './action-type.enum';
 export * from './dice-type.enum';
+export * from './dice-zone.enum';
 export * from './token-type.enum';
 export * from './passive-type.enum';
 export * from './score-type.enum';

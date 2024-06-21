@@ -61,3 +61,27 @@ $SPACE_UNIT: 4;
 .h-8 {
   @include h(8);
 }
+
+.draggable-shadow {
+  animation: gigle 2s linear 0s infinite;
+}
+
+.draggable-shadow__yellow {
+  --shadow-color: #ffdd33;
+}
+
+.draggable-shadow__blue {
+  --shadow-color: #6497b1;
+}
+
+@keyframes gigle {
+  0% {
+    box-shadow: 0 0 10px 8px var(--shadow-color, #ffdd33);
+  }
+  50% {
+    box-shadow: 0 0 40px 8px var(--shadow-color, #ffdd33);
+  }
+  100% {
+    box-shadow: 0 0 10px 8px var(--shadow-color, #ffdd33);
+  }
+}

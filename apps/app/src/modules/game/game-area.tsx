@@ -27,11 +27,6 @@ export const GameArea = () => {
               <Redirect to={Router.Login()}></Redirect>
             ))}
         </div>
-        <div className="flex justify-right">
-          <Button color="red" onClick={logout}>
-            logout
-          </Button>
-        </div>
       </div>
     </IsAuthenticatedConsoleGuard>
   );

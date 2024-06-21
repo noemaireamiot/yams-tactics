@@ -13,5 +13,6 @@
     "straight": "Large straight",
     "five_of_a_kind": "Yahtzee",
     "lucky": "Chance"
-  }
+  },
+  "kept_dice": "Kept dice"
 }
