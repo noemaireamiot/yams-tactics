@@ -1,16 +1,10 @@
 import { match } from 'ts-pattern';
-import {
-  GameContextProvider,
-  Router,
-  UserAuthContext,
-  useAuth,
-} from '@yams-tactics/frontend-common';
-import { Button, Redirect } from '@yams-tactics/frontend-components';
+import { GameContextProvider, Router } from '@yams-tactics/frontend-common';
+import { Redirect } from '@yams-tactics/frontend-components';
 import { IsAuthenticatedConsoleGuard } from '../../shared';
 import { GamePage } from './page';
 
 export const GameArea = () => {
-  const { logout } = useAuth<UserAuthContext>();
   const route = Router.useRoute(['Game']);
 
   return (
@@ -26,11 +20,6 @@ export const GameArea = () => {
             .otherwise(() => (
               <Redirect to={Router.Login()}></Redirect>
             ))}
-        </div>
-        <div className="flex justify-right">
-          <Button color="red" onClick={logout}>
-            logout
-          </Button>
         </div>
       </div>
     </IsAuthenticatedConsoleGuard>
