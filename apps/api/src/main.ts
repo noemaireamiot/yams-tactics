@@ -3,6 +3,7 @@ import { NestFactory } from '@nestjs/core';
 import { ApiModule } from './api.module';
 import cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
+import { WsAdapter } from '@nestjs/platform-ws';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiModule);
@@ -14,6 +15,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
 
   const port = API_PORT || 3000;
+  app.useWebSocketAdapter(new WsAdapter(app));
 
   app.use(cookieParser(app.get(ConfigService).get('COOKIE_SECRET')));
 

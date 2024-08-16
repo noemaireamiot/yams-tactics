@@ -1,7 +1,7 @@
 import { GameModel } from '@yams-tactics/domain';
 import { useAuthHeader } from './auth.query';
 import { axios } from '../axios';
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const ENDPOINT = '/game';
 

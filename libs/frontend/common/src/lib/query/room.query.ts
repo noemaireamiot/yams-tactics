@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { RoomModel, GameModel } from '@yams-tactics/domain';
 import { axios } from '../axios';
 import { useAuthHeader } from './auth.query';

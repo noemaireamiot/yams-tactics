@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const defaultQueryConfig = { staleTime: 60000 };
 const queryClient = new QueryClient({

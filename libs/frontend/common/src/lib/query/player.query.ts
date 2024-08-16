@@ -1,4 +1,4 @@
-import { useMutation } from 'react-query';
+import { useMutation } from '@tanstack/react-query';
 import { Action } from '@yams-tactics/domain';
 import { axios } from '../axios';
 import { useAuthHeader } from './auth.query';
