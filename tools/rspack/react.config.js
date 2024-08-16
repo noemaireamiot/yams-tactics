@@ -4,6 +4,7 @@ const {
   ProgressPlugin,
   CopyRspackPlugin,
   HtmlRspackPlugin,
+  EnvironmentPlugin,
 } = require('@rspack/core');
 
 module.exports = composePlugins(withNx(), withReact(), (config) => {
@@ -21,6 +22,7 @@ module.exports = composePlugins(withNx(), withReact(), (config) => {
       new HtmlRspackPlugin(config.builtins.html[0]),
       new CopyRspackPlugin(config.builtins.copy),
       new DefinePlugin(config.builtins.define),
+      new EnvironmentPlugin(['API_URL', 'API_PORT']),
     ],
     builtins: {
       react: config.builtins.react,

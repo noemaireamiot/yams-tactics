@@ -6,13 +6,14 @@ import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiModule);
+  const { APP_URL, API_URL, API_PORT } = process.env;
 
   const globalPrefix = 'api';
 
-  app.enableCors({ origin: 'http://localhost:4200', credentials: true });
+  app.enableCors({ origin: APP_URL, credentials: true });
   app.setGlobalPrefix(globalPrefix);
 
-  const port = process.env.PORT || 3000;
+  const port = API_PORT || 3000;
 
   app.use(cookieParser(app.get(ConfigService).get('COOKIE_SECRET')));
 
@@ -21,7 +22,7 @@ async function bootstrap() {
   await app.listen(port);
 
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Application is running on: ${API_URL}:${port}/${globalPrefix}`
   );
 }
 

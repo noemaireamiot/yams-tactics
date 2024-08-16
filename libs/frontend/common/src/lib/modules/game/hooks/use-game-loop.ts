@@ -13,21 +13,21 @@ export function useGameLoop(
   const getCurrentPlayer = useGetCurrentPlayer();
   useEffect(() => {
     let clearInterval: CallableFunction | null = null;
-    if (!state.isLoading) {
-      ({ clearInterval } = gameLoop(state.game, {
-        gameRate: GAME_RATE / 3,
-        gameUpdateFn: (game) => {
-          dispatch({
-            type: 'game_loop',
-            game,
-            currentPlayer: getCurrentPlayer(state.game.players),
-          });
-        },
-      }));
-    }
+    // if (!state.isLoading) {
+    //   ({ clearInterval } = gameLoop(state.game, {
+    //     gameRate: GAME_RATE / 3,
+    //     gameUpdateFn: (game) => {
+    //       dispatch({
+    //         type: 'game_loop',
+    //         game,
+    //         currentPlayer: getCurrentPlayer(state.game.players),
+    //       });
+    //     },
+    //   }));
+    // }
 
-    return () => {
-      if (clearInterval) clearInterval();
-    };
+    // return () => {
+    // if (clearInterval) clearInterval();
+    // };
   }, [state.isLoading, state.game, getCurrentPlayer, dispatch]);
 }
